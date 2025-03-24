@@ -1,0 +1,189 @@
+{
+  "documentationSummary": {
+    "projectTitle": "Vyrlo - منصة العثور على الخدمات المحلية",
+    "documentationVersion": "1.0",
+    "lastUpdated": "2023-03-23",
+    "documentationFiles": [
+      {
+        "fileName": "project_overview.json",
+        "description": "نظرة عامة على المشروع",
+        "content": "معلومات أساسية عن المشروع تشمل وصف المشروع، أهدافه، الجمهور المستهدف، نقاط البيع الفريدة، التقنيات المستخدمة، وهيكل النظام",
+        "size": "3.3KB"
+      },
+      {
+        "fileName": "development_phases.json",
+        "description": "مراحل التطوير",
+        "content": "تفاصيل المراحل الخمس لتطوير المشروع مع الأولويات والمهام والوقت المقدر لكل مرحلة",
+        "size": "19KB"
+      },
+      {
+        "fileName": "database_models.json",
+        "description": "نماذج قاعدة البيانات",
+        "content": "توثيق شامل لنماذج قاعدة البيانات الرئيسية والعلاقات بينها والتحقق من صحة البيانات",
+        "size": "15KB"
+      },
+      {
+        "fileName": "frontend_components.json",
+        "description": "مكونات الواجهة الأمامية",
+        "content": "تفاصيل القوالب والصفحات ومكونات واجهة المستخدم المشتركة ومتطلبات البيانات لكل منها",
+        "size": "33KB"
+      },
+      {
+        "fileName": "backend_services.json",
+        "description": "خدمات الخلفية",
+        "content": "توثيق شامل للمتحكمات والخدمات و SignalR Hubs ومسارات API وتفاصيل التنفيذ",
+        "size": "31KB"
+      },
+      {
+        "fileName": "authentication_security.json",
+        "description": "المصادقة والأمان",
+        "content": "تفاصيل عن نظام المصادقة وأمان البيانات وإجراءات الحماية والتوجيهات الأمنية",
+        "size": "13KB"
+      },
+      {
+        "fileName": "search_maps_integration.json",
+        "description": "البحث والخرائط",
+        "content": "توثيق نظام البحث المتقدم وتكامل الخرائط وميزات البحث المستندة إلى الموقع",
+        "size": "16KB"
+      },
+      {
+        "fileName": "notifications_chat.json",
+        "description": "الإشعارات والدردشة",
+        "content": "تفاصيل نظام الإشعارات في الوقت الفعلي ونظام الدردشة المباشرة باستخدام SignalR",
+        "size": "21KB"
+      },
+      {
+        "fileName": "payment_system.json",
+        "description": "نظام المدفوعات",
+        "content": "توثيق نظام المدفوعات والاشتراكات والإعلانات وبوابات الدفع وإجراءات الأمان",
+        "size": "20KB"
+      },
+      {
+        "fileName": "team_allocation.json",
+        "description": "توزيع المهام على الفريق",
+        "content": "تخصيص المهام لأعضاء الفريق الخمسة حسب المراحل والمهارات والمسؤوليات",
+        "size": "20KB"
+      }
+    ],
+    "documentationOverview": {
+      "totalFiles": 10,
+      "totalSize": "171KB",
+      "developmentMethodology": "Agile/Scrum مع تقسيم المشروع إلى 5 مراحل رئيسية",
+      "estimatedDuration": "17 يوم",
+      "teamSize": 5
+    },
+    "implementationSequence": {
+      "phase1": {
+        "name": "إعداد البنية التحتية والقاعدة",
+        "duration": "3 أيام",
+        "keyDocumentationFiles": ["project_overview.json", "development_phases.json", "database_models.json"]
+      },
+      "phase2": {
+        "name": "تطوير الصفحات الأساسية وميزات البحث",
+        "duration": "4 أيام",
+        "keyDocumentationFiles": ["frontend_components.json", "backend_services.json", "search_maps_integration.json"]
+      },
+      "phase3": {
+        "name": "تطوير لوحات التحكم ونظام المدفوعات",
+        "duration": "5 أيام",
+        "keyDocumentationFiles": ["authentication_security.json", "payment_system.json"]
+      },
+      "phase4": {
+        "name": "تطوير أنظمة التفاعل",
+        "duration": "3 أيام",
+        "keyDocumentationFiles": ["notifications_chat.json"]
+      },
+      "phase5": {
+        "name": "اختبار وإطلاق",
+        "duration": "2 أيام",
+        "keyDocumentationFiles": ["team_allocation.json"]
+      }
+    },
+    "workDistribution": {
+      "member1": {
+        "role": "Full-Stack Developer / Team Lead",
+        "totalHours": 188,
+        "keyResponsibilities": [
+          "قيادة الفريق والتنسيق",
+          "إعداد البنية التحتية الأساسية",
+          "دمج نظام المدفوعات",
+          "تكوين SignalR"
+        ]
+      },
+      "member2": {
+        "role": "Backend Developer",
+        "totalHours": 312,
+        "keyResponsibilities": [
+          "تطوير نماذج قاعدة البيانات",
+          "نظام المستخدمين والصلاحيات",
+          "خدمات البحث والفلترة",
+          "نظام الإشعارات والدردشة (باك-إند)"
+        ]
+      },
+      "member3": {
+        "role": "Frontend Developer",
+        "totalHours": 250,
+        "keyResponsibilities": [
+          "تطوير الصفحات العامة",
+          "واجهات لوحات التحكم",
+          "واجهة الدردشة المباشرة",
+          "دمج الخرائط في الفرونت-إند"
+        ]
+      },
+      "member4": {
+        "role": "UI/UX Designer / Frontend Developer",
+        "totalHours": 234,
+        "keyResponsibilities": [
+          "تصميم الهوية البصرية",
+          "تنفيذ CSS/SASS للتصميمات",
+          "تصميم واجهات لوحات التحكم",
+          "تحسين SEO"
+        ]
+      },
+      "member5": {
+        "role": "DevOps / Database Engineer",
+        "totalHours": 160,
+        "keyResponsibilities": [
+          "تصميم وإدارة قاعدة البيانات",
+          "تأمين التطبيق ومعالجة القضايا الأمنية",
+          "تحسين أداء قاعدة البيانات",
+          "إعداد بيئة الإنتاج"
+        ]
+      }
+    },
+    "nextSteps": [
+      "مراجعة التوثيق مع جميع أعضاء الفريق",
+      "تنظيم اجتماع تخطيط المشروع الأولي",
+      "إعداد بيئة التطوير والتكوين الأولي",
+      "إعداد مستودع Git وإنشاء الهيكل الأساسي للمشروع",
+      "إعداد لوحة إدارة المهام (Task Board)"
+    ],
+    "projectRisksAndMitigation": [
+      {
+        "risk": "تأخر إكمال البنية التحتية الأساسية",
+        "impact": "عالي",
+        "mitigation": "تخصيص موارد إضافية في المرحلة الأولى وتحديد أولويات المكونات الأساسية"
+      },
+      {
+        "risk": "صعوبات في تكامل SignalR للإشعارات والدردشة",
+        "impact": "متوسط",
+        "mitigation": "بدء الاختبارات المبكرة لـ SignalR وتخصيص وقت إضافي للاختبار"
+      },
+      {
+        "risk": "مشاكل أداء مع البحث في قاعدة بيانات كبيرة",
+        "impact": "متوسط",
+        "mitigation": "تنفيذ استراتيجيات التخزين المؤقت وتحسين الاستعلامات منذ البداية"
+      },
+      {
+        "risk": "تحديات أمان البيانات والمدفوعات",
+        "impact": "عالي",
+        "mitigation": "تنفيذ مراجعات أمنية منتظمة واستخدام بوابات دفع موثوقة"
+      },
+      {
+        "risk": "تحديات في تجربة المستخدم عبر متصفحات وأجهزة متعددة",
+        "impact": "متوسط",
+        "mitigation": "اختبار متعدد المتصفحات والأجهزة في وقت مبكر ودوري"
+      }
+    ]
+  }
+} 

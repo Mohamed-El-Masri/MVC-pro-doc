@@ -1,0 +1,454 @@
+{
+  "notificationsAndChat": {
+    "notificationSystem": {
+      "description": "نظام إشعارات متكامل يتيح للمستخدمين البقاء على اطلاع بآخر التحديثات والتفاعلات",
+      "technology": "SignalR",
+      "notificationTypes": [
+        {
+          "name": "User Account Notifications",
+          "description": "إشعارات متعلقة بحساب المستخدم",
+          "types": [
+            "تأكيد التسجيل",
+            "تأكيد تغيير كلمة المرور",
+            "تنبيه تسجيل دخول من جهاز جديد",
+            "تنبيه تحديث معلومات الحساب",
+            "تنبيه انتهاء صلاحية الاشتراك"
+          ],
+          "deliveryMethods": ["داخل الموقع", "البريد الإلكتروني"],
+          "priority": "عالية",
+          "implementationPhase": 2
+        },
+        {
+          "name": "Business Owner Notifications",
+          "description": "إشعارات لأصحاب الأعمال عن أعمالهم",
+          "types": [
+            "تقييم جديد",
+            "تعليق جديد",
+            "رسالة جديدة من العملاء",
+            "طلب حجز جديد",
+            "تنبيه انتهاء صلاحية الإعلان",
+            "تنبيه اقتراب انتهاء صلاحية الاشتراك",
+            "إحصائيات يومية (عدد الزيارات، التفاعلات)"
+          ],
+          "deliveryMethods": ["داخل الموقع", "البريد الإلكتروني", "رسائل SMS (اختياري)"],
+          "priority": "عالية",
+          "implementationPhase": 3
+        },
+        {
+          "name": "Customer Notifications",
+          "description": "إشعارات للعملاء عن الخدمات والتفاعلات",
+          "types": [
+            "رد على تعليق",
+            "رد على رسالة",
+            "تأكيد حجز",
+            "تذكير بموعد",
+            "عروض وتخفيضات من الخدمات المفضلة",
+            "خدمات جديدة قريبة من الموقع",
+            "إشعار عندما يرد صاحب العمل على رسالة"
+          ],
+          "deliveryMethods": ["داخل الموقع", "البريد الإلكتروني"],
+          "priority": "متوسطة",
+          "implementationPhase": 3
+        },
+        {
+          "name": "Admin Notifications",
+          "description": "إشعارات للمسؤولين عن نشاط الموقع",
+          "types": [
+            "تسجيل مستخدم جديد",
+            "إضافة خدمة جديدة",
+            "الإبلاغ عن محتوى",
+            "دفع جديد",
+            "تقارير النظام (الأخطاء، الأداء)",
+            "طلبات التحقق من الهوية",
+            "تنبيهات الاحتيال المحتمل"
+          ],
+          "deliveryMethods": ["داخل الموقع", "البريد الإلكتروني", "رسائل SMS للحالات الحرجة"],
+          "priority": "متوسطة",
+          "implementationPhase": 3
+        },
+        {
+          "name": "System Notifications",
+          "description": "إشعارات النظام العامة",
+          "types": [
+            "تحديثات النظام",
+            "صيانة مجدولة",
+            "ميزات جديدة",
+            "تغيير سياسات الموقع",
+            "تغيير شروط الخدمة"
+          ],
+          "deliveryMethods": ["داخل الموقع", "البريد الإلكتروني للمستخدمين النشطين"],
+          "priority": "منخفضة",
+          "implementationPhase": 4
+        }
+      ],
+      "components": [
+        {
+          "name": "Real-time Notification Engine",
+          "description": "محرك الإشعارات الفوري باستخدام SignalR",
+          "features": [
+            "إرسال إشعارات فورية للمستخدمين المتصلين",
+            "تخزين الإشعارات للمستخدمين غير المتصلين",
+            "مزامنة حالة الإشعارات عبر الأجهزة المتعددة",
+            "دعم الاتصال/إعادة الاتصال التلقائي",
+            "توزيع الحمل للتعامل مع عدد كبير من المستخدمين"
+          ],
+          "implementationPriority": "عالية",
+          "estimatedEffort": "40 ساعة",
+          "dependencies": ["البنية التحتية الأساسية", "نظام المستخدمين"]
+        },
+        {
+          "name": "Notification Center UI",
+          "description": "واجهة مستخدم لمركز الإشعارات",
+          "features": [
+            "قائمة منسدلة للإشعارات في الشريط العلوي",
+            "مؤشر لعدد الإشعارات غير المقروءة",
+            "تمييز الإشعارات الجديدة والمقروءة",
+            "إمكانية وضع علامة مقروءة لجميع الإشعارات",
+            "فلترة الإشعارات حسب النوع",
+            "صفحة مخصصة لعرض كل الإشعارات",
+            "تفاصيل الإشعار وروابط للمحتوى ذي الصلة",
+            "دعم التنبيهات المنبثقة (Toast Notifications)"
+          ],
+          "implementationPriority": "عالية",
+          "estimatedEffort": "35 ساعة",
+          "dependencies": ["Real-time Notification Engine", "القالب العام للموقع"]
+        },
+        {
+          "name": "Email Notification Service",
+          "description": "خدمة إرسال الإشعارات عبر البريد الإلكتروني",
+          "features": [
+            "قوالب بريد إلكتروني مخصصة لكل نوع إشعار",
+            "جدولة إرسال رسائل البريد الإلكتروني",
+            "تجميع الإشعارات المتعددة في رسالة واحدة (اختياري)",
+            "تتبع فتح البريد الإلكتروني والنقر على الروابط",
+            "إمكانية إلغاء الاشتراك من أنواع معينة من الإشعارات"
+          ],
+          "implementationPriority": "متوسطة",
+          "estimatedEffort": "30 ساعة",
+          "dependencies": ["Real-time Notification Engine", "نظام قوالب البريد الإلكتروني"]
+        },
+        {
+          "name": "Notification Preferences",
+          "description": "إعدادات وتفضيلات الإشعارات للمستخدمين",
+          "features": [
+            "تمكين/تعطيل أنواع محددة من الإشعارات",
+            "اختيار وسائل الإرسال (داخل الموقع، البريد الإلكتروني، SMS)",
+            "إعدادات الخصوصية للإشعارات",
+            "جدولة وقت استلام الإشعارات (فورية، ملخص يومي، يومي)",
+            "حفظ التفضيلات لكل جهاز (اختياري)"
+          ],
+          "implementationPriority": "متوسطة",
+          "estimatedEffort": "25 ساعة",
+          "dependencies": ["نظام المستخدمين", "صفحة الإعدادات"]
+        }
+      ],
+      "implementationGuidelines": {
+        "databaseSchema": {
+          "notificationTable": {
+            "fields": [
+              "Id (PK)",
+              "UserId (FK)",
+              "Type",
+              "Title",
+              "Message",
+              "RelatedEntityId",
+              "RelatedEntityType",
+              "IsRead",
+              "DeliveryStatus",
+              "CreatedAt",
+              "ReadAt",
+              "ExpiresAt"
+            ],
+            "indexes": ["UserId", "CreatedAt", "IsRead"]
+          },
+          "notificationSettingsTable": {
+            "fields": [
+              "Id (PK)",
+              "UserId (FK)",
+              "NotificationType",
+              "IsEnabledInApp",
+              "IsEnabledEmail",
+              "IsEnabledSMS",
+              "DigestFrequency"
+            ]
+          }
+        },
+        "signalRImplementation": {
+          "hubs": [
+            {
+              "name": "NotificationHub",
+              "methods": [
+                "SendNotification(userId, notification)",
+                "SendNotificationToGroup(groupName, notification)",
+                "SendNotificationToAll(notification)",
+                "MarkAsRead(notificationId)",
+                "MarkAllAsRead(userId)",
+                "GetUnreadCount(userId)"
+              ]
+            }
+          ],
+          "clientMethods": [
+            "receiveNotification(notification)",
+            "updateUnreadCount(count)",
+            "markAsRead(notificationId)"
+          ],
+          "connectionManagement": [
+            "تسجيل اتصال المستخدم في المجموعات المناسبة",
+            "التعامل مع إعادة الاتصال وفقدان الاتصال",
+            "إدارة الاتصالات المتعددة لنفس المستخدم"
+          ]
+        },
+        "bestPractices": [
+          "استخدام نمط Publisher/Subscriber لفصل منتجي الإشعارات عن مستهلكيها",
+          "جدولة الإشعارات غير الفورية لتقليل الحمل",
+          "حذف الإشعارات القديمة تلقائيًا بعد فترة محددة",
+          "استخدام مؤقت تأخير للإشعارات المتكررة (Debounce)",
+          "تحميل الإشعارات بالصفحات لتحسين الأداء",
+          "تخزين الإشعارات المتكررة في ذاكرة التخزين المؤقت"
+        ]
+      }
+    },
+    "chatSystem": {
+      "description": "نظام دردشة مباشرة يتيح التواصل المباشر بين المستخدمين وأصحاب الأعمال",
+      "technology": "SignalR",
+      "chatTypes": [
+        {
+          "name": "Customer to Business Chat",
+          "description": "دردشة بين العملاء وأصحاب الأعمال",
+          "features": [
+            "بدء محادثة من صفحة تفاصيل الخدمة",
+            "إرسال واستقبال الرسائل النصية",
+            "إرسال الصور (اختياري)",
+            "مؤشر الكتابة (Typing Indicator)",
+            "إشعارات للرسائل الجديدة",
+            "تاريخ المحادثات",
+            "مؤشر حالة الاتصال (متصل/غير متصل)",
+            "مشاركة الموقع على الخريطة"
+          ],
+          "priority": "عالية",
+          "implementationPhase": 4
+        },
+        {
+          "name": "Admin Support Chat",
+          "description": "دردشة الدعم الفني مع المسؤولين",
+          "features": [
+            "دردشة مباشرة مع فريق الدعم",
+            "نظام تذاكر للمشاكل المعقدة",
+            "إمكانية تحويل المحادثة بين المسؤولين",
+            "عرض معلومات المستخدم للمسؤول",
+            "إمكانية مشاركة الشاشة (اختياري)",
+            "إرسال ملفات",
+            "أسئلة شائعة سريعة"
+          ],
+          "priority": "متوسطة",
+          "implementationPhase": 4
+        }
+      ],
+      "components": [
+        {
+          "name": "Chat Engine",
+          "description": "محرك الدردشة الأساسي باستخدام SignalR",
+          "features": [
+            "إرسال واستقبال الرسائل الفورية",
+            "إدارة حالة الاتصال/عدم الاتصال",
+            "تخزين الرسائل للمستخدمين غير المتصلين",
+            "مجموعات الدردشة والمحادثات الخاصة",
+            "تتبع حالة القراءة",
+            "مزامنة المحادثات عبر الأجهزة المتعددة"
+          ],
+          "implementationPriority": "عالية",
+          "estimatedEffort": "50 ساعة",
+          "dependencies": ["البنية التحتية الأساسية", "نظام المستخدمين"]
+        },
+        {
+          "name": "Chat UI",
+          "description": "واجهة المستخدم للدردشة",
+          "features": [
+            "نافذة دردشة منبثقة في أسفل الصفحة",
+            "قائمة المحادثات النشطة",
+            "عرض المحادثة مع سجل الرسائل",
+            "مؤشر الكتابة والقراءة",
+            "إمكانية إرسال الصور والملفات",
+            "دعم الرموز التعبيرية (Emojis)",
+            "بحث في سجل المحادثات",
+            "تنبيهات الرسائل الجديدة"
+          ],
+          "implementationPriority": "عالية",
+          "estimatedEffort": "45 ساعة",
+          "dependencies": ["Chat Engine", "القالب العام للموقع"]
+        },
+        {
+          "name": "Message History",
+          "description": "تخزين وعرض سجل المحادثات",
+          "features": [
+            "تخزين سجل كامل للمحادثات",
+            "تحميل المحادثات السابقة عند فتح الدردشة",
+            "تحميل تدريجي للرسائل القديمة (Pagination)",
+            "البحث في سجل المحادثات",
+            "تصفية المحادثات حسب التاريخ",
+            "حذف/أرشفة المحادثات القديمة",
+            "تصدير سجل المحادثات (للمسؤولين)"
+          ],
+          "implementationPriority": "متوسطة",
+          "estimatedEffort": "30 ساعة",
+          "dependencies": ["Chat Engine", "نظام تخزين البيانات"]
+        },
+        {
+          "name": "Business Chat Management",
+          "description": "إدارة الدردشة لأصحاب الأعمال",
+          "features": [
+            "لوحة تحكم للمحادثات النشطة",
+            "إدارة وقت الاستجابة وحالة المحادثة",
+            "ردود سريعة مسبقة التعريف",
+            "فرز المحادثات حسب الأولوية",
+            "تنبيهات للمحادثات غير المجاب عليها",
+            "إحصائيات المحادثات (عدد، مدة، معدل الرضا)",
+            "نقل المحادثة بين الموظفين (للأعمال الكبيرة)"
+          ],
+          "implementationPriority": "متوسطة",
+          "estimatedEffort": "35 ساعة",
+          "dependencies": ["Chat Engine", "لوحة تحكم الأعمال"]
+        }
+      ],
+      "implementationGuidelines": {
+        "databaseSchema": {
+          "conversationTable": {
+            "fields": [
+              "Id (PK)",
+              "InitiatorId (FK)",
+              "RecipientId (FK)",
+              "BusinessId (FK)",
+              "Status",
+              "Title",
+              "CreatedAt",
+              "UpdatedAt",
+              "LastMessageAt",
+              "IsArchived"
+            ],
+            "indexes": ["InitiatorId", "RecipientId", "BusinessId", "LastMessageAt"]
+          },
+          "messageTable": {
+            "fields": [
+              "Id (PK)",
+              "ConversationId (FK)",
+              "SenderId (FK)",
+              "Content",
+              "ContentType",
+              "Metadata",
+              "SentAt",
+              "DeliveredAt",
+              "ReadAt",
+              "IsDeleted"
+            ],
+            "indexes": ["ConversationId", "SenderId", "SentAt"]
+          }
+        },
+        "signalRImplementation": {
+          "hubs": [
+            {
+              "name": "ChatHub",
+              "methods": [
+                "SendMessage(conversationId, message)",
+                "JoinConversation(conversationId)",
+                "LeaveConversation(conversationId)",
+                "GetConversationHistory(conversationId, pageSize, pageNumber)",
+                "MarkAsRead(messageId)",
+                "TypingIndicator(conversationId, isTyping)",
+                "GetActiveConversations(userId)"
+              ]
+            }
+          ],
+          "clientMethods": [
+            "receiveMessage(message)",
+            "userJoinedConversation(userId, conversationId)",
+            "userLeftConversation(userId, conversationId)",
+            "messageDelivered(messageId)",
+            "messageRead(messageId)",
+            "typingIndicatorChanged(userId, conversationId, isTyping)",
+            "conversationUpdated(conversation)"
+          ],
+          "groupManagement": [
+            "إنشاء مجموعة SignalR لكل محادثة",
+            "إضافة المستخدمين إلى المجموعات المناسبة",
+            "إزالة المستخدمين من المجموعات عند إنهاء المحادثة"
+          ]
+        },
+        "businessLogic": {
+          "messageDelivery": [
+            "إرسال الرسائل الفورية للمستخدمين المتصلين",
+            "تخزين الرسائل للمستخدمين غير المتصلين",
+            "تحديث حالة التسليم والقراءة",
+            "إرسال إشعارات للرسائل الجديدة",
+            "حظر الرسائل غير المرغوب فيها (Spam)"
+          ],
+          "conversationManagement": [
+            "بدء محادثة جديدة",
+            "إنهاء/أرشفة المحادثات",
+            "تصنيف المحادثات (عاجلة، قيد الانتظار، مغلقة)",
+            "دمج المحادثات المتعددة لنفس المستخدم وصاحب العمل"
+          ]
+        },
+        "bestPractices": [
+          "تحميل سجل المحادثات بشكل تدريجي لتحسين الأداء",
+          "تقليل تخزين الرسائل على العميل وتحميلها عند الطلب",
+          "تنفيذ آلية للتعامل مع انقطاع الاتصال وإعادة الاتصال",
+          "استخدام WebSockets مع التراجع إلى Long Polling للمتصفحات القديمة",
+          "تخزين الرسائل المتكررة في ذاكرة التخزين المؤقت",
+          "تنفيذ آلية للتعامل مع الحمل العالي وتوزيع الحمل"
+        ],
+        "scalabilityConsiderations": [
+          "استخدام Redis Backplane للتوسع الأفقي (Horizontal Scaling)",
+          "تجزئة المحادثات (Sharding)",
+          "أرشفة المحادثات القديمة لتحسين أداء قاعدة البيانات",
+          "تقييد حجم الرسائل والملفات المرفقة",
+          "ضغط البيانات للتخزين وإرسال الرسائل الكبيرة"
+        ]
+      }
+    },
+    "integrationPoints": {
+      "description": "نقاط التكامل بين نظامي الإشعارات والدردشة والأنظمة الأخرى",
+      "integrations": [
+        {
+          "name": "User System Integration",
+          "description": "التكامل مع نظام المستخدمين",
+          "details": [
+            "مزامنة حالة المستخدم (متصل/غير متصل)",
+            "الوصول إلى معلومات الملف الشخصي",
+            "التحقق من الصلاحيات وإمكانية الوصول",
+            "إعدادات الخصوصية والإشعارات"
+          ]
+        },
+        {
+          "name": "Business System Integration",
+          "description": "التكامل مع نظام الأعمال",
+          "details": [
+            "ربط المحادثات بالأعمال المحددة",
+            "تحديثات على الأعمال (إشعارات عن التغييرات)",
+            "إشعارات التقييمات والمراجعات",
+            "إشعارات الحجز والاستفسارات"
+          ]
+        },
+        {
+          "name": "Email System Integration",
+          "description": "التكامل مع نظام البريد الإلكتروني",
+          "details": [
+            "إرسال إشعارات البريد الإلكتروني",
+            "إشعارات الدردشة بالبريد الإلكتروني للمستخدمين غير المتصلين",
+            "ملخصات المحادثات",
+            "تذكيرات المحادثات غير المجاب عليها"
+          ]
+        },
+        {
+          "name": "Mobile Push Notification",
+          "description": "التكامل مع إشعارات الدفع للجوال (مستقبلي)",
+          "details": [
+            "إرسال إشعارات الدفع للتطبيق الجوال",
+            "تنبيهات الرسائل الجديدة",
+            "تنبيهات الإشعارات المهمة",
+            "تنبيهات الحجز والمواعيد"
+          ]
+        }
+      ]
+    }
+  }
+} 

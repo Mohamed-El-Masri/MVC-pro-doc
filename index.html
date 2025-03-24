@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vyrlo - توثيق المشروع</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="overlay" id="loadingOverlay">
+        <div class="spinner-grow text-primary" role="status">
+            <span class="visually-hidden">جاري التحميل...</span>
+        </div>
+    </div>
+
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand animate__animated animate__fadeIn" href="#">
+                    <i class="bi bi-layers-half"></i> Vyrlo
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item"><a class="nav-link active" href="#" data-section="home"><i class="bi bi-house-door"></i> الرئيسية</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-section="phases"><i class="bi bi-calendar3"></i> مراحل التطوير</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-section="models"><i class="bi bi-database"></i> قاعدة البيانات</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-section="frontend"><i class="bi bi-window"></i> الواجهة الأمامية</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-section="backend"><i class="bi bi-server"></i> الخلفية</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-section="team"><i class="bi bi-people"></i> الفريق</a></li>
+                    </ul>
+                    <div class="d-flex">
+                        <button class="btn btn-outline-light theme-toggle" id="themeToggle">
+                            <i class="bi bi-moon-stars"></i>
+                        </button>
+                        <div class="ms-2 search-container">
+                            <input type="text" class="form-control search-input" placeholder="بحث...">
+                            <i class="bi bi-search search-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-lg-2 d-md-block sidebar collapse show bg-white" id="sidebarMenu">
+                <div class="position-sticky pt-3">
+                    <h5 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>التوثيق</span>
+                    </h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" data-doc="project_overview">
+                                <i class="bi bi-file-earmark-text"></i> نظرة عامة
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-doc="development_phases">
+                                <i class="bi bi-calendar4-range"></i> مراحل التطوير
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-doc="database_models">
+                                <i class="bi bi-diagram-3"></i> نماذج قاعدة البيانات
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-doc="frontend_components">
+                                <i class="bi bi-window"></i> مكونات الواجهة
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-doc="backend_services">
+                                <i class="bi bi-cpu"></i> خدمات الخلفية
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-doc="authentication_security">
+                                <i class="bi bi-shield-lock"></i> المصادقة والأمان
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-doc="search_maps_integration">
+                                <i class="bi bi-geo-alt"></i> البحث والخرائط
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-doc="notifications_chat">
+                                <i class="bi bi-bell"></i> الإشعارات والدردشة
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-doc="payment_system">
+                                <i class="bi bi-credit-card"></i> نظام المدفوعات
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-doc="team_allocation">
+                                <i class="bi bi-people-fill"></i> توزيع المهام
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+                <div id="content-area" class="py-4">
+                    <!-- Content will be loaded here dynamically -->
+                    <div id="home-section" class="animate__animated animate__fadeIn">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2"><i class="bi bi-layers-half"></i> Vyrlo - منصة العثور على الخدمات المحلية</h1>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="bi bi-info-circle"></i> نظرة عامة على المشروع</h5>
+                                        <p class="card-text">منصة إلكترونية محلية لاستعراض وتصفح الخدمات المقدمة من أصحاب الأعمال المختلفة في منطقة المستخدم. تمكّن المنصة المستخدمين من التواصل مع مقدمي الخدمات، حجز المواعيد، والاطلاع على التقييمات والمراجعات الحقيقية للخدمات، وتساعد أصحاب الأعمال الصغيرة والمتوسطة على التسويق لأنفسهم والوصول إلى عملاء جدد.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card shadow-sm mb-4 hover-card">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><i class="bi bi-calendar3"></i> مدة المشروع</h5>
+                                                <p class="card-text">17 يوم موزعة على 5 مراحل رئيسية</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card shadow-sm mb-4 hover-card">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><i class="bi bi-people"></i> حجم الفريق</h5>
+                                                <p class="card-text">5 أعضاء بأدوار متنوعة</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="bi bi-stack"></i> ملفات التوثيق</h5>
+                                        <div class="progress-stacked mb-3">
+                                            <div class="progress" role="progressbar" style="width: 25%">
+                                                <div class="progress-bar bg-primary">25%</div>
+                                            </div>
+                                            <div class="progress" role="progressbar" style="width: 25%">
+                                                <div class="progress-bar bg-success">25%</div>
+                                            </div>
+                                            <div class="progress" role="progressbar" style="width: 25%">
+                                                <div class="progress-bar bg-info">25%</div>
+                                            </div>
+                                            <div class="progress" role="progressbar" style="width: 25%">
+                                                <div class="progress-bar bg-warning">25%</div>
+                                            </div>
+                                        </div>
+                                        <div class="list-group">
+                                            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-doc="project_overview">
+                                                نظرة عامة
+                                                <span class="badge bg-primary rounded-pill">3.3KB</span>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-doc="development_phases">
+                                                مراحل التطوير
+                                                <span class="badge bg-primary rounded-pill">19KB</span>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-doc="database_models">
+                                                نماذج قاعدة البيانات
+                                                <span class="badge bg-primary rounded-pill">15KB</span>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-doc="team_allocation">
+                                                توزيع المهام
+                                                <span class="badge bg-primary rounded-pill">20KB</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="bi bi-diagram-3"></i> هيكل المشروع</h5>
+                                        <div class="project-structure">
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="phase-card phase-1">
+                                                        <div class="phase-icon"><i class="bi bi-1-circle"></i></div>
+                                                        <h6>إعداد البنية التحتية والقاعدة</h6>
+                                                        <span class="phase-duration">3 أيام</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="phase-card phase-2">
+                                                        <div class="phase-icon"><i class="bi bi-2-circle"></i></div>
+                                                        <h6>تطوير الصفحات الأساسية وميزات البحث</h6>
+                                                        <span class="phase-duration">4 أيام</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="phase-card phase-3">
+                                                        <div class="phase-icon"><i class="bi bi-3-circle"></i></div>
+                                                        <h6>تطوير لوحات التحكم ونظام المدفوعات</h6>
+                                                        <span class="phase-duration">5 أيام</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="phase-card phase-4">
+                                                        <div class="phase-icon"><i class="bi bi-4-circle"></i></div>
+                                                        <h6>تطوير أنظمة التفاعل</h6>
+                                                        <span class="phase-duration">3 أيام</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="phase-card phase-5">
+                                                        <div class="phase-icon"><i class="bi bi-5-circle"></i></div>
+                                                        <h6>اختبار وإطلاق</h6>
+                                                        <span class="phase-duration">2 أيام</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="bi bi-code-slash"></i> التقنيات المستخدمة</h5>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <h6><i class="bi bi-front"></i> الواجهة الأمامية</h6>
+                                                    <span class="badge bg-secondary">HTML5</span>
+                                                    <span class="badge bg-secondary">CSS3</span>
+                                                    <span class="badge bg-secondary">JavaScript</span>
+                                                    <span class="badge bg-secondary">jQuery</span>
+                                                    <span class="badge bg-secondary">Bootstrap</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <h6><i class="bi bi-hdd-rack"></i> الخلفية</h6>
+                                                    <span class="badge bg-secondary">ASP.NET MVC</span>
+                                                    <span class="badge bg-secondary">C#</span>
+                                                    <span class="badge bg-secondary">Entity Framework</span>
+                                                    <span class="badge bg-secondary">SignalR</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <h6><i class="bi bi-database"></i> قاعدة البيانات</h6>
+                                                    <span class="badge bg-secondary">SQL Server</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <h6><i class="bi bi-pin-map"></i> API</h6>
+                                                    <span class="badge bg-secondary">Google Maps</span>
+                                                    <span class="badge bg-secondary">PayPal</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="bi bi-star"></i> نقاط البيع الفريدة</h5>
+                                        <ul class="feature-list">
+                                            <li><i class="bi bi-geo-alt"></i> تحديد المواقع الجغرافية للخدمات القريبة</li>
+                                            <li><i class="bi bi-star-half"></i> نظام تقييم ومراجعة شامل</li>
+                                            <li><i class="bi bi-chat-dots"></i> دردشة مباشرة لخدمة العملاء</li>
+                                            <li><i class="bi bi-bell"></i> إشعارات فورية باستخدام SignalR</li>
+                                            <li><i class="bi bi-megaphone"></i> نظام إعلانات مرن</li>
+                                            <li><i class="bi bi-box"></i> اشتراكات متنوعة للأعمال</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-layers-half"></i> Vyrlo</h5>
+                    <p>منصة العثور على الخدمات المحلية</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>© 2023 جميع الحقوق محفوظة</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/script.js" type="module"></script>
+</body>
+</html> 

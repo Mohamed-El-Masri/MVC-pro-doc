@@ -1,0 +1,1075 @@
+{
+  "databaseModels": [
+    {
+      "modelName": "User",
+      "tableName": "Users",
+      "description": "نموذج المستخدمين بالنظام",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "description": "معرف المستخدم التسلسلي",
+          "constraints": ["identity", "auto-increment"]
+        },
+        {
+          "name": "FullName",
+          "type": "string",
+          "maxLength": 100,
+          "isRequired": true,
+          "description": "الاسم الكامل للمستخدم",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "Email",
+          "type": "string",
+          "maxLength": 256,
+          "isRequired": true,
+          "description": "البريد الإلكتروني (يستخدم لتسجيل الدخول)",
+          "constraints": ["unique", "not null"]
+        },
+        {
+          "name": "PhoneNumber",
+          "type": "string",
+          "maxLength": 20,
+          "isRequired": false,
+          "description": "رقم الهاتف",
+          "constraints": []
+        },
+        {
+          "name": "PasswordHash",
+          "type": "string",
+          "isRequired": true,
+          "description": "هاش كلمة المرور المشفرة",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "Role",
+          "type": "string",
+          "maxLength": 20,
+          "isRequired": true,
+          "description": "دور المستخدم (Admin, BusinessOwner, Customer)",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "ProfileImage",
+          "type": "string",
+          "maxLength": 255,
+          "isRequired": false,
+          "description": "مسار صورة الملف الشخصي",
+          "constraints": []
+        },
+        {
+          "name": "CreatedAt",
+          "type": "DateTime",
+          "isRequired": true,
+          "description": "تاريخ إنشاء الحساب",
+          "constraints": ["not null", "default: current_timestamp"]
+        },
+        {
+          "name": "LastLogin",
+          "type": "DateTime",
+          "isRequired": false,
+          "description": "تاريخ آخر تسجيل دخول",
+          "constraints": []
+        },
+        {
+          "name": "IsActive",
+          "type": "bool",
+          "isRequired": true,
+          "description": "حالة تفعيل الحساب",
+          "constraints": ["not null", "default: true"]
+        },
+        {
+          "name": "EmailConfirmed",
+          "type": "bool",
+          "isRequired": true,
+          "description": "حالة تأكيد البريد الإلكتروني",
+          "constraints": ["not null", "default: false"]
+        }
+      ],
+      "relationships": [
+        {
+          "relatedModel": "Business",
+          "type": "OneToMany",
+          "foreignKey": "OwnerId",
+          "description": "الأعمال/الخدمات التي يملكها المستخدم"
+        },
+        {
+          "relatedModel": "Review",
+          "type": "OneToMany",
+          "foreignKey": "UserId",
+          "description": "المراجعات التي كتبها المستخدم"
+        },
+        {
+          "relatedModel": "Payment",
+          "type": "OneToMany",
+          "foreignKey": "UserId",
+          "description": "المدفوعات التي قام بها المستخدم"
+        },
+        {
+          "relatedModel": "Notification",
+          "type": "OneToMany",
+          "foreignKey": "UserId",
+          "description": "الإشعارات المرسلة للمستخدم"
+        },
+        {
+          "relatedModel": "Chat",
+          "type": "OneToMany",
+          "foreignKey": "SenderId",
+          "description": "الرسائل المرسلة من المستخدم"
+        },
+        {
+          "relatedModel": "Chat",
+          "type": "OneToMany",
+          "foreignKey": "ReceiverId",
+          "description": "الرسائل المستلمة من المستخدم"
+        }
+      ],
+      "indexing": [
+        {
+          "columns": ["Email"],
+          "isUnique": true
+        },
+        {
+          "columns": ["Role"],
+          "isUnique": false
+        },
+        {
+          "columns": ["CreatedAt"],
+          "isUnique": false
+        }
+      ],
+      "validations": [
+        {
+          "field": "Email",
+          "rules": ["email", "required", "max:256", "unique"]
+        },
+        {
+          "field": "FullName",
+          "rules": ["required", "min:3", "max:100"]
+        },
+        {
+          "field": "PhoneNumber",
+          "rules": ["phone", "max:20"]
+        }
+      ]
+    },
+    {
+      "modelName": "Business",
+      "tableName": "Businesses",
+      "description": "نموذج الأعمال/الخدمات",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "description": "معرف العمل/الخدمة التسلسلي",
+          "constraints": ["identity", "auto-increment"]
+        },
+        {
+          "name": "OwnerId",
+          "type": "int",
+          "isRequired": true,
+          "description": "معرف مالك العمل/الخدمة (مرجع للمستخدم)",
+          "constraints": ["foreign key", "not null"]
+        },
+        {
+          "name": "Name",
+          "type": "string",
+          "maxLength": 100,
+          "isRequired": true,
+          "description": "اسم العمل/الخدمة",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "CategoryId",
+          "type": "int",
+          "isRequired": true,
+          "description": "معرف الفئة (مرجع للفئة)",
+          "constraints": ["foreign key", "not null"]
+        },
+        {
+          "name": "Description",
+          "type": "string",
+          "maxLength": 2000,
+          "isRequired": true,
+          "description": "وصف العمل/الخدمة",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "MainImage",
+          "type": "string",
+          "maxLength": 255,
+          "isRequired": true,
+          "description": "مسار الصورة الرئيسية",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "Gallery",
+          "type": "string",
+          "maxLength": 4000,
+          "isRequired": false,
+          "description": "معرض الصور (مخزن كـ JSON)",
+          "constraints": []
+        },
+        {
+          "name": "LocationLatitude",
+          "type": "decimal",
+          "precision": 18,
+          "scale": 6,
+          "isRequired": true,
+          "description": "خط العرض للموقع",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "LocationLongitude",
+          "type": "decimal",
+          "precision": 18,
+          "scale": 6,
+          "isRequired": true,
+          "description": "خط الطول للموقع",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "Address",
+          "type": "string",
+          "maxLength": 255,
+          "isRequired": true,
+          "description": "العنوان التفصيلي",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "Features",
+          "type": "string",
+          "maxLength": 1000,
+          "isRequired": false,
+          "description": "مميزات محددة (مخزنة كـ JSON)",
+          "constraints": []
+        },
+        {
+          "name": "BusinessType",
+          "type": "string",
+          "maxLength": 20,
+          "isRequired": true,
+          "description": "نوع العمل (Sponsored, Featured, Regular)",
+          "constraints": ["not null", "default: Regular"]
+        },
+        {
+          "name": "IsActive",
+          "type": "bool",
+          "isRequired": true,
+          "description": "حالة النشاط (يظهر على الموقع أم لا)",
+          "constraints": ["not null", "default: true"]
+        },
+        {
+          "name": "SubscriptionEndDate",
+          "type": "DateTime",
+          "isRequired": false,
+          "description": "تاريخ انتهاء الاشتراك",
+          "constraints": []
+        },
+        {
+          "name": "MenuItems",
+          "type": "string",
+          "maxLength": 4000,
+          "isRequired": false,
+          "description": "قائمة المنتجات/الخدمات (مخزنة كـ JSON)",
+          "constraints": []
+        },
+        {
+          "name": "CreatedAt",
+          "type": "DateTime",
+          "isRequired": true,
+          "description": "تاريخ إنشاء العمل/الخدمة",
+          "constraints": ["not null", "default: current_timestamp"]
+        },
+        {
+          "name": "UpdatedAt",
+          "type": "DateTime",
+          "isRequired": false,
+          "description": "تاريخ آخر تحديث",
+          "constraints": []
+        },
+        {
+          "name": "ViewCount",
+          "type": "int",
+          "isRequired": true,
+          "description": "عدد مرات المشاهدة",
+          "constraints": ["not null", "default: 0"]
+        },
+        {
+          "name": "AverageRating",
+          "type": "decimal",
+          "precision": 3,
+          "scale": 1,
+          "isRequired": true,
+          "description": "متوسط التقييمات",
+          "constraints": ["not null", "default: 0"]
+        },
+        {
+          "name": "VerificationStatus",
+          "type": "string",
+          "maxLength": 20,
+          "isRequired": true,
+          "description": "حالة التحقق (Pending, Verified, Rejected)",
+          "constraints": ["not null", "default: Pending"]
+        }
+      ],
+      "relationships": [
+        {
+          "relatedModel": "User",
+          "type": "ManyToOne",
+          "foreignKey": "OwnerId",
+          "description": "مالك العمل/الخدمة"
+        },
+        {
+          "relatedModel": "Category",
+          "type": "ManyToOne",
+          "foreignKey": "CategoryId",
+          "description": "فئة العمل/الخدمة"
+        },
+        {
+          "relatedModel": "Review",
+          "type": "OneToMany",
+          "foreignKey": "BusinessId",
+          "description": "المراجعات الخاصة بالعمل/الخدمة"
+        },
+        {
+          "relatedModel": "Ad",
+          "type": "OneToMany",
+          "foreignKey": "BusinessId",
+          "description": "الإعلانات الخاصة بالعمل/الخدمة"
+        },
+        {
+          "relatedModel": "OpeningHour",
+          "type": "OneToMany",
+          "foreignKey": "BusinessId",
+          "description": "أوقات العمل"
+        },
+        {
+          "relatedModel": "MenuItem",
+          "type": "OneToMany",
+          "foreignKey": "BusinessId",
+          "description": "عناصر القائمة/المنتجات"
+        },
+        {
+          "relatedModel": "BusinessGallery",
+          "type": "OneToMany",
+          "foreignKey": "BusinessId",
+          "description": "معرض الصور"
+        }
+      ],
+      "indexing": [
+        {
+          "columns": ["OwnerId"],
+          "isUnique": false
+        },
+        {
+          "columns": ["CategoryId"],
+          "isUnique": false
+        },
+        {
+          "columns": ["Name"],
+          "isUnique": false
+        },
+        {
+          "columns": ["LocationLatitude", "LocationLongitude"],
+          "isUnique": false
+        },
+        {
+          "columns": ["BusinessType"],
+          "isUnique": false
+        },
+        {
+          "columns": ["IsActive"],
+          "isUnique": false
+        },
+        {
+          "columns": ["AverageRating"],
+          "isUnique": false
+        }
+      ],
+      "validations": [
+        {
+          "field": "Name",
+          "rules": ["required", "min:3", "max:100"]
+        },
+        {
+          "field": "Description",
+          "rules": ["required", "min:10", "max:2000"]
+        },
+        {
+          "field": "Address",
+          "rules": ["required", "max:255"]
+        },
+        {
+          "field": "LocationLatitude",
+          "rules": ["required", "numeric"]
+        },
+        {
+          "field": "LocationLongitude",
+          "rules": ["required", "numeric"]
+        }
+      ]
+    },
+    {
+      "modelName": "Category",
+      "tableName": "Categories",
+      "description": "نموذج الفئات",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "description": "معرف الفئة التسلسلي",
+          "constraints": ["identity", "auto-increment"]
+        },
+        {
+          "name": "Name",
+          "type": "string",
+          "maxLength": 50,
+          "isRequired": true,
+          "description": "اسم الفئة",
+          "constraints": ["not null", "unique"]
+        },
+        {
+          "name": "Icon",
+          "type": "string",
+          "maxLength": 255,
+          "isRequired": true,
+          "description": "مسار أيقونة الفئة",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "DefaultFeatures",
+          "type": "string",
+          "maxLength": 1000,
+          "isRequired": false,
+          "description": "الميزات الافتراضية للفئة (مخزنة كـ JSON)",
+          "constraints": []
+        },
+        {
+          "name": "Description",
+          "type": "string",
+          "maxLength": 500,
+          "isRequired": false,
+          "description": "وصف الفئة",
+          "constraints": []
+        },
+        {
+          "name": "IsActive",
+          "type": "bool",
+          "isRequired": true,
+          "description": "حالة نشاط الفئة",
+          "constraints": ["not null", "default: true"]
+        },
+        {
+          "name": "DisplayOrder",
+          "type": "int",
+          "isRequired": true,
+          "description": "ترتيب العرض",
+          "constraints": ["not null", "default: 0"]
+        }
+      ],
+      "relationships": [
+        {
+          "relatedModel": "Business",
+          "type": "OneToMany",
+          "foreignKey": "CategoryId",
+          "description": "الأعمال/الخدمات التابعة للفئة"
+        }
+      ],
+      "indexing": [
+        {
+          "columns": ["Name"],
+          "isUnique": true
+        },
+        {
+          "columns": ["DisplayOrder"],
+          "isUnique": false
+        }
+      ],
+      "validations": [
+        {
+          "field": "Name",
+          "rules": ["required", "min:2", "max:50", "unique"]
+        },
+        {
+          "field": "Icon",
+          "rules": ["required", "max:255"]
+        }
+      ]
+    },
+    {
+      "modelName": "Review",
+      "tableName": "Reviews",
+      "description": "نموذج المراجعات",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "description": "معرف المراجعة التسلسلي",
+          "constraints": ["identity", "auto-increment"]
+        },
+        {
+          "name": "UserId",
+          "type": "int",
+          "isRequired": true,
+          "description": "معرف المستخدم",
+          "constraints": ["foreign key", "not null"]
+        },
+        {
+          "name": "BusinessId",
+          "type": "int",
+          "isRequired": true,
+          "description": "معرف العمل/الخدمة",
+          "constraints": ["foreign key", "not null"]
+        },
+        {
+          "name": "Rating",
+          "type": "int",
+          "isRequired": true,
+          "description": "التقييم (1-5)",
+          "constraints": ["not null", "range: 1-5"]
+        },
+        {
+          "name": "Comment",
+          "type": "string",
+          "maxLength": 1000,
+          "isRequired": true,
+          "description": "نص المراجعة",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "CreatedAt",
+          "type": "DateTime",
+          "isRequired": true,
+          "description": "تاريخ كتابة المراجعة",
+          "constraints": ["not null", "default: current_timestamp"]
+        }
+      ],
+      "relationships": [
+        {
+          "relatedModel": "User",
+          "type": "ManyToOne",
+          "foreignKey": "UserId",
+          "description": "كاتب المراجعة"
+        },
+        {
+          "relatedModel": "Business",
+          "type": "ManyToOne",
+          "foreignKey": "BusinessId",
+          "description": "العمل/الخدمة المراجعة"
+        }
+      ]
+    },
+    {
+      "modelName": "Ad",
+      "tableName": "Ads",
+      "description": "نموذج الإعلانات",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "description": "معرف الإعلان التسلسلي",
+          "constraints": ["identity", "auto-increment"]
+        },
+        {
+          "name": "BusinessId",
+          "type": "int",
+          "isRequired": false,
+          "description": "معرف العمل/الخدمة (اختياري)",
+          "constraints": ["foreign key"]
+        },
+        {
+          "name": "Image",
+          "type": "string",
+          "maxLength": 255,
+          "isRequired": true,
+          "description": "مسار صورة الإعلان",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "Link",
+          "type": "string",
+          "maxLength": 255,
+          "isRequired": true,
+          "description": "رابط الإعلان",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "Type",
+          "type": "string",
+          "maxLength": 20,
+          "isRequired": true,
+          "description": "نوع الإعلان (BusinessAd, ExternalAd)",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "StartDate",
+          "type": "DateTime",
+          "isRequired": true,
+          "description": "تاريخ بداية عرض الإعلان",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "EndDate",
+          "type": "DateTime",
+          "isRequired": true,
+          "description": "تاريخ نهاية عرض الإعلان",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "PackageType",
+          "type": "string",
+          "maxLength": 20,
+          "isRequired": true,
+          "description": "نوع الباقة (Daily, Weekly, Monthly)",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "IsActive",
+          "type": "bool",
+          "isRequired": true,
+          "description": "حالة نشاط الإعلان",
+          "constraints": ["not null", "default: true"]
+        }
+      ],
+      "relationships": [
+        {
+          "relatedModel": "Business",
+          "type": "ManyToOne",
+          "foreignKey": "BusinessId",
+          "description": "العمل/الخدمة المعلن عنها"
+        }
+      ]
+    },
+    {
+      "modelName": "Payment",
+      "tableName": "Payments",
+      "description": "نموذج المدفوعات",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "description": "معرف الدفع التسلسلي",
+          "constraints": ["identity", "auto-increment"]
+        },
+        {
+          "name": "UserId",
+          "type": "int",
+          "isRequired": true,
+          "description": "معرف المستخدم",
+          "constraints": ["foreign key", "not null"]
+        },
+        {
+          "name": "Amount",
+          "type": "decimal",
+          "precision": 10,
+          "scale": 2,
+          "isRequired": true,
+          "description": "مبلغ الدفع",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "PaymentMethod",
+          "type": "string",
+          "maxLength": 20,
+          "isRequired": true,
+          "description": "طريقة الدفع (PayPal, CreditCard)",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "PaymentStatus",
+          "type": "string",
+          "maxLength": 20,
+          "isRequired": true,
+          "description": "حالة الدفع (Pending, Completed, Failed, Refunded)",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "TransactionId",
+          "type": "string",
+          "maxLength": 100,
+          "isRequired": true,
+          "description": "معرف العملية من بوابة الدفع",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "CreatedAt",
+          "type": "DateTime",
+          "isRequired": true,
+          "description": "تاريخ العملية",
+          "constraints": ["not null", "default: current_timestamp"]
+        }
+      ],
+      "relationships": [
+        {
+          "relatedModel": "User",
+          "type": "ManyToOne",
+          "foreignKey": "UserId",
+          "description": "المستخدم الذي قام بالدفع"
+        }
+      ]
+    },
+    {
+      "modelName": "Notification",
+      "tableName": "Notifications",
+      "description": "نموذج الإشعارات",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "description": "معرف الإشعار التسلسلي",
+          "constraints": ["identity", "auto-increment"]
+        },
+        {
+          "name": "UserId",
+          "type": "int",
+          "isRequired": true,
+          "description": "معرف المستخدم المستلم",
+          "constraints": ["foreign key", "not null"]
+        },
+        {
+          "name": "Message",
+          "type": "string",
+          "maxLength": 500,
+          "isRequired": true,
+          "description": "نص الإشعار",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "IsRead",
+          "type": "bool",
+          "isRequired": true,
+          "description": "حالة قراءة الإشعار",
+          "constraints": ["not null", "default: false"]
+        },
+        {
+          "name": "CreatedAt",
+          "type": "DateTime",
+          "isRequired": true,
+          "description": "تاريخ الإشعار",
+          "constraints": ["not null", "default: current_timestamp"]
+        },
+        {
+          "name": "Type",
+          "type": "string",
+          "maxLength": 50,
+          "isRequired": true,
+          "description": "نوع الإشعار (NewVisit, NewReview, NewMessage)",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "BusinessId",
+          "type": "int",
+          "isRequired": false,
+          "description": "معرف العمل/الخدمة (اختياري)",
+          "constraints": ["foreign key"]
+        },
+        {
+          "name": "ReviewId",
+          "type": "int",
+          "isRequired": false,
+          "description": "معرف المراجعة (اختياري)",
+          "constraints": ["foreign key"]
+        },
+        {
+          "name": "ChatId",
+          "type": "int",
+          "isRequired": false,
+          "description": "معرف المحادثة (اختياري)",
+          "constraints": ["foreign key"]
+        }
+      ],
+      "relationships": [
+        {
+          "relatedModel": "User",
+          "type": "ManyToOne",
+          "foreignKey": "UserId",
+          "description": "المستخدم المستلم للإشعار"
+        },
+        {
+          "relatedModel": "Business",
+          "type": "ManyToOne",
+          "foreignKey": "BusinessId",
+          "description": "العمل/الخدمة المتعلقة بالإشعار"
+        },
+        {
+          "relatedModel": "Review",
+          "type": "ManyToOne",
+          "foreignKey": "ReviewId",
+          "description": "المراجعة المتعلقة بالإشعار"
+        },
+        {
+          "relatedModel": "Chat",
+          "type": "ManyToOne",
+          "foreignKey": "ChatId",
+          "description": "المحادثة المتعلقة بالإشعار"
+        }
+      ]
+    },
+    {
+      "modelName": "Chat",
+      "tableName": "Chats",
+      "description": "نموذج الدردشة",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "description": "معرف الرسالة التسلسلي",
+          "constraints": ["identity", "auto-increment"]
+        },
+        {
+          "name": "SenderId",
+          "type": "int",
+          "isRequired": true,
+          "description": "معرف المرسل",
+          "constraints": ["foreign key", "not null"]
+        },
+        {
+          "name": "ReceiverId",
+          "type": "int",
+          "isRequired": true,
+          "description": "معرف المستلم",
+          "constraints": ["foreign key", "not null"]
+        },
+        {
+          "name": "Message",
+          "type": "string",
+          "maxLength": 1000,
+          "isRequired": true,
+          "description": "نص الرسالة",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "IsRead",
+          "type": "bool",
+          "isRequired": true,
+          "description": "حالة قراءة الرسالة",
+          "constraints": ["not null", "default: false"]
+        },
+        {
+          "name": "CreatedAt",
+          "type": "DateTime",
+          "isRequired": true,
+          "description": "تاريخ الإرسال",
+          "constraints": ["not null", "default: current_timestamp"]
+        },
+        {
+          "name": "ConversationId",
+          "type": "string",
+          "maxLength": 50,
+          "isRequired": true,
+          "description": "معرف المحادثة",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "BusinessId",
+          "type": "int",
+          "isRequired": false,
+          "description": "معرف العمل/الخدمة (اختياري)",
+          "constraints": ["foreign key"]
+        }
+      ],
+      "relationships": [
+        {
+          "relatedModel": "User",
+          "type": "ManyToOne",
+          "foreignKey": "SenderId",
+          "description": "المستخدم المرسل"
+        },
+        {
+          "relatedModel": "User",
+          "type": "ManyToOne",
+          "foreignKey": "ReceiverId",
+          "description": "المستخدم المستلم"
+        },
+        {
+          "relatedModel": "Business",
+          "type": "ManyToOne",
+          "foreignKey": "BusinessId",
+          "description": "العمل/الخدمة المتعلقة بالمحادثة"
+        }
+      ]
+    },
+    {
+      "modelName": "OpeningHour",
+      "tableName": "OpeningHours",
+      "description": "نموذج أوقات العمل",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "description": "معرف وقت العمل التسلسلي",
+          "constraints": ["identity", "auto-increment"]
+        },
+        {
+          "name": "BusinessId",
+          "type": "int",
+          "isRequired": true,
+          "description": "معرف العمل/الخدمة",
+          "constraints": ["foreign key", "not null"]
+        },
+        {
+          "name": "DayOfWeek",
+          "type": "int",
+          "isRequired": true,
+          "description": "اليوم (0-6 حيث 0 هو الأحد)",
+          "constraints": ["not null", "range: 0-6"]
+        },
+        {
+          "name": "OpenTime",
+          "type": "TimeSpan",
+          "isRequired": false,
+          "description": "وقت الفتح",
+          "constraints": []
+        },
+        {
+          "name": "CloseTime",
+          "type": "TimeSpan",
+          "isRequired": false,
+          "description": "وقت الإغلاق",
+          "constraints": []
+        },
+        {
+          "name": "IsClosed",
+          "type": "bool",
+          "isRequired": true,
+          "description": "مغلق في هذا اليوم",
+          "constraints": ["not null", "default: false"]
+        },
+        {
+          "name": "CloseReason",
+          "type": "string",
+          "maxLength": 255,
+          "isRequired": false,
+          "description": "سبب الإغلاق (اختياري)",
+          "constraints": []
+        }
+      ],
+      "relationships": [
+        {
+          "relatedModel": "Business",
+          "type": "ManyToOne",
+          "foreignKey": "BusinessId",
+          "description": "العمل/الخدمة"
+        }
+      ]
+    },
+    {
+      "modelName": "Package",
+      "tableName": "Packages",
+      "description": "نموذج الحزم",
+      "fields": [
+        {
+          "name": "Id",
+          "type": "int",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "description": "معرف الحزمة التسلسلي",
+          "constraints": ["identity", "auto-increment"]
+        },
+        {
+          "name": "Name",
+          "type": "string",
+          "maxLength": 50,
+          "isRequired": true,
+          "description": "اسم الحزمة (Basic, Standard, Premium)",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "Duration",
+          "type": "int",
+          "isRequired": true,
+          "description": "مدة الحزمة بالأيام",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "Price",
+          "type": "decimal",
+          "precision": 10,
+          "scale": 2,
+          "isRequired": true,
+          "description": "سعر الحزمة",
+          "constraints": ["not null"]
+        },
+        {
+          "name": "FeaturesIncluded",
+          "type": "string",
+          "maxLength": 1000,
+          "isRequired": false,
+          "description": "الميزات المضمنة (مخزنة كـ JSON)",
+          "constraints": []
+        },
+        {
+          "name": "IsActive",
+          "type": "bool",
+          "isRequired": true,
+          "description": "حالة نشاط الحزمة",
+          "constraints": ["not null", "default: true"]
+        },
+        {
+          "name": "MaxBusinessCount",
+          "type": "int",
+          "isRequired": true,
+          "description": "الحد الأقصى لعدد الأعمال",
+          "constraints": ["not null", "default: 1"]
+        },
+        {
+          "name": "MaxImagesPerBusiness",
+          "type": "int",
+          "isRequired": true,
+          "description": "الحد الأقصى لعدد الصور لكل عمل",
+          "constraints": ["not null", "default: 5"]
+        },
+        {
+          "name": "IncludesFeaturedListing",
+          "type": "bool",
+          "isRequired": true,
+          "description": "تتضمن قائمة مميزة",
+          "constraints": ["not null", "default: false"]
+        },
+        {
+          "name": "IncludesAdvertising",
+          "type": "bool",
+          "isRequired": true,
+          "description": "تتضمن إعلانات",
+          "constraints": ["not null", "default: false"]
+        },
+        {
+          "name": "AdDaysIncluded",
+          "type": "int",
+          "isRequired": true,
+          "description": "عدد أيام الإعلانات المضمنة",
+          "constraints": ["not null", "default: 0"]
+        },
+        {
+          "name": "MonthlyDiscountPercentage",
+          "type": "decimal",
+          "precision": 5,
+          "scale": 2,
+          "isRequired": true,
+          "description": "نسبة الخصم الشهري",
+          "constraints": ["not null", "default: 0"]
+        }
+      ]
+    }
+  ]
+} 

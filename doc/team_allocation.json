@@ -1,0 +1,499 @@
+{
+  "teamAllocation": {
+    "teamOverview": {
+      "totalMembers": 5,
+      "roles": [
+        "Full-Stack Developer",
+        "Backend Developer",
+        "Frontend Developer", 
+        "UI/UX Designer",
+        "DevOps/Database Engineer"
+      ]
+    },
+    "teamMembers": [
+      {
+        "memberId": 1,
+        "role": "Full-Stack Developer / Team Lead",
+        "primarySkills": ["ASP.NET MVC", "C#", "Entity Framework", "JavaScript", "SQL Server", "Project Management"],
+        "secondarySkills": ["SignalR", "Bootstrap", "jQuery", "Azure"],
+        "responsibilities": [
+          "قيادة الفريق والتنسيق بين المهام",
+          "تصميم الهيكل العام للمشروع",
+          "إعداد البنية التحتية الأساسية",
+          "تنفيذ المكونات الأساسية (Core Components)",
+          "مراجعة الشفرة البرمجية للفريق",
+          "حل مشاكل التكامل (Integration)"
+        ]
+      },
+      {
+        "memberId": 2,
+        "role": "Backend Developer",
+        "primarySkills": ["ASP.NET MVC", "C#", "Entity Framework", "Web API", "SQL Server", "Identity Framework"],
+        "secondarySkills": ["SignalR", "Unit Testing", "LINQ", "Performance Optimization"],
+        "responsibilities": [
+          "تطوير نماذج قاعدة البيانات وعلاقاتها",
+          "تنفيذ Repository Pattern والخدمات الأساسية",
+          "تطوير نظام المستخدمين والصلاحيات",
+          "تنفيذ خدمات البحث والفلترة",
+          "تطوير واجهات برمجة التطبيقات (APIs)",
+          "معالجة استدعاءات AJAX والتفاعلات"
+        ]
+      },
+      {
+        "memberId": 3,
+        "role": "Frontend Developer",
+        "primarySkills": ["HTML5", "CSS3", "JavaScript", "jQuery", "Bootstrap", "Responsive Design"],
+        "secondarySkills": ["AJAX", "Razor Views", "SignalR (Client)", "Font Awesome"],
+        "responsibilities": [
+          "تنفيذ واجهات المستخدم للصفحات العامة",
+          "تنفيذ واجهات لوحات التحكم",
+          "تطوير المكونات المشتركة (Shared Components)",
+          "تحسين تجربة المستخدم (UX)",
+          "تطبيق التصميم الاستجابي (Responsive Design)",
+          "دمج الخرائط والميزات التفاعلية"
+        ]
+      },
+      {
+        "memberId": 4,
+        "role": "UI/UX Designer / Frontend Developer",
+        "primarySkills": ["UI Design", "UX Design", "CSS3", "SASS/LESS", "Bootstrap", "Adobe XD/Figma"],
+        "secondarySkills": ["JavaScript", "jQuery", "HTML5", "Responsive Design", "Accessibility"],
+        "responsibilities": [
+          "تصميم الهوية البصرية للموقع",
+          "تصميم واجهات المستخدم (Mockups)",
+          "تطوير الأصول الرسومية (Assets)",
+          "تنفيذ التصميمات باستخدام CSS/SASS",
+          "تحسين سهولة الاستخدام",
+          "اختبار واجهات المستخدم وتجربة المستخدم"
+        ]
+      },
+      {
+        "memberId": 5,
+        "role": "DevOps / Database Engineer",
+        "primarySkills": ["SQL Server", "Entity Framework", "Azure", "CI/CD", "Database Design"],
+        "secondarySkills": ["ASP.NET MVC", "C#", "PowerShell", "Performance Tuning", "Security"],
+        "responsibilities": [
+          "تصميم وإدارة قاعدة البيانات",
+          "تحسين الاستعلامات وأداء قاعدة البيانات",
+          "تكوين بيئات التطوير والإنتاج",
+          "إعداد النشر التلقائي (CI/CD)",
+          "تأمين التطبيق ومعالجة القضايا الأمنية",
+          "مراقبة الأداء والتحسين المستمر"
+        ]
+      }
+    ],
+    "phaseAllocation": [
+      {
+        "phaseNumber": 1,
+        "phaseName": "إعداد البنية التحتية والقاعدة",
+        "allocation": [
+          {
+            "memberId": 1,
+            "tasks": ["1.1", "1.4"],
+            "estimatedHours": 40,
+            "description": "مسؤول عن إعداد المشروع وهيكلته، وإنشاء الريبوزيتوريز والخدمات الأساسية",
+            "deliverables": [
+              "هيكل المشروع الأساسي",
+              "تكوين الحزم والإعدادات",
+              "ريبوزيتوريز قاعدة البيانات",
+              "خدمات الوصول للبيانات"
+            ]
+          },
+          {
+            "memberId": 2,
+            "tasks": ["1.2", "1.3"],
+            "estimatedHours": 72,
+            "description": "مسؤول عن تصميم وتنفيذ نماذج قاعدة البيانات وإنشاء نظام المستخدمين والصلاحيات",
+            "deliverables": [
+              "نماذج قاعدة البيانات",
+              "تكوين العلاقات بين النماذج",
+              "DbContext وMigrations",
+              "نظام المستخدمين والأدوار",
+              "واجهات التسجيل وتسجيل الدخول"
+            ]
+          },
+          {
+            "memberId": 4,
+            "tasks": ["UI Design"],
+            "estimatedHours": 40,
+            "description": "تصميم الهوية البصرية والواجهات الأساسية للموقع",
+            "deliverables": [
+              "دليل التصميم (Style Guide)",
+              "تصميمات UI لصفحات المستخدمين",
+              "تصميمات UI للوحات التحكم",
+              "الشعار والهوية البصرية"
+            ]
+          },
+          {
+            "memberId": 5,
+            "tasks": ["Database Setup"],
+            "estimatedHours": 30,
+            "description": "إعداد قاعدة البيانات وتكوين بيئة التطوير",
+            "deliverables": [
+              "تكوين قاعدة البيانات",
+              "نظام النسخ الاحتياطي",
+              "إعداد بيئة التطوير المحلية",
+              "وثائق قاعدة البيانات"
+            ]
+          }
+        ]
+      },
+      {
+        "phaseNumber": 2,
+        "phaseName": "تطوير الصفحات الأساسية وميزات البحث",
+        "allocation": [
+          {
+            "memberId": 1,
+            "tasks": ["Code Review", "Integration"],
+            "estimatedHours": 30,
+            "description": "التنسيق بين المهام ومراجعة الشفرة وحل مشاكل التكامل",
+            "deliverables": [
+              "تقارير مراجعة الشفرة",
+              "توثيق التكامل بين المكونات",
+              "حل مشاكل التكامل"
+            ]
+          },
+          {
+            "memberId": 2,
+            "tasks": ["2.2", "2.3 (Backend)"],
+            "estimatedHours": 70,
+            "description": "تطوير نظام البحث والفلترة ودمج خدمات الخرائط في الباك-إند",
+            "deliverables": [
+              "خدمات البحث والفلترة",
+              "واجهات برمجة الخرائط",
+              "نظام الاستعلامات المتقدمة",
+              "تحسين أداء البحث"
+            ]
+          },
+          {
+            "memberId": 3,
+            "tasks": ["2.1", "2.3 (Frontend)"],
+            "estimatedHours": 80,
+            "description": "تطوير الصفحات العامة الأساسية ودمج الخرائط في الفرونت-إند",
+            "deliverables": [
+              "الصفحة الرئيسية والقالب العام",
+              "صفحة تفاصيل الخدمة",
+              "صفحة نتائج البحث",
+              "دمج خرائط Google/Leaflet.js"
+            ]
+          },
+          {
+            "memberId": 4,
+            "tasks": ["UI Implementation"],
+            "estimatedHours": 60,
+            "description": "تنفيذ تصميمات UI وتحسين تجربة المستخدم",
+            "deliverables": [
+              "تنفيذ CSS/SASS للتصميمات",
+              "المكونات المشتركة",
+              "الأيقونات والصور",
+              "التصميم الاستجابي"
+            ]
+          },
+          {
+            "memberId": 5,
+            "tasks": ["Performance Tuning"],
+            "estimatedHours": 30,
+            "description": "تحسين أداء قاعدة البيانات واستعلامات البحث",
+            "deliverables": [
+              "تحسين استعلامات البحث",
+              "إضافة Indexes للبحث",
+              "إعداد Caching",
+              "تقارير الأداء"
+            ]
+          }
+        ]
+      },
+      {
+        "phaseNumber": 3,
+        "phaseName": "تطوير لوحات التحكم ونظام المدفوعات",
+        "allocation": [
+          {
+            "memberId": 1,
+            "tasks": ["3.4"],
+            "estimatedHours": 48,
+            "description": "دمج نظام المدفوعات (PayPal API)",
+            "deliverables": [
+              "دمج PayPal API",
+              "نظام المعاملات والمدفوعات",
+              "إشعارات الدفع",
+              "تأمين عمليات الدفع"
+            ]
+          },
+          {
+            "memberId": 2,
+            "tasks": ["3.2", "3.3 (Backend)"],
+            "estimatedHours": 90,
+            "description": "تطوير لوحة تحكم الأدمن وباك-إند نظام الإعلانات والاشتراكات",
+            "deliverables": [
+              "خدمات إدارة المستخدمين",
+              "خدمات إدارة الفئات",
+              "خدمات إدارة الإعلانات",
+              "نظام الاشتراكات"
+            ]
+          },
+          {
+            "memberId": 3,
+            "tasks": ["3.1", "3.3 (Frontend)"],
+            "estimatedHours": 80,
+            "description": "تطوير واجهات لوحات تحكم المستخدمين وواجهات الإعلانات",
+            "deliverables": [
+              "واجهات إدارة الحساب",
+              "واجهات إدارة الأعمال",
+              "واجهات إدارة القوائم",
+              "واجهات شراء وإدارة الإعلانات"
+            ]
+          },
+          {
+            "memberId": 4,
+            "tasks": ["UI Implementation"],
+            "estimatedHours": 70,
+            "description": "تصميم وتنفيذ واجهات لوحات التحكم",
+            "deliverables": [
+              "تصميم لوحات التحكم",
+              "تنفيذ CSS/SASS للوحات التحكم",
+              "الرسوم البيانية والإحصائيات",
+              "تحسين تجربة المستخدم"
+            ]
+          },
+          {
+            "memberId": 5,
+            "tasks": ["Payment Security"],
+            "estimatedHours": 40,
+            "description": "تأمين نظام المدفوعات وقاعدة البيانات المالية",
+            "deliverables": [
+              "تأمين بيانات الدفع",
+              "تشفير البيانات الحساسة",
+              "تدقيق المعاملات المالية",
+              "إعداد النسخ الاحتياطي"
+            ]
+          }
+        ]
+      },
+      {
+        "phaseNumber": 4,
+        "phaseName": "تطوير أنظمة التفاعل",
+        "allocation": [
+          {
+            "memberId": 1,
+            "tasks": ["SignalR Infrastructure"],
+            "estimatedHours": 30,
+            "description": "تكوين البنية التحتية لـ SignalR والإشراف على التكامل",
+            "deliverables": [
+              "تكوين SignalR في المشروع",
+              "تكامل SignalR مع الخدمات",
+              "توثيق استخدام SignalR"
+            ]
+          },
+          {
+            "memberId": 2,
+            "tasks": ["4.1", "4.2 (Backend)"],
+            "estimatedHours": 60,
+            "description": "تطوير نظام الإشعارات والدردشة المباشرة (باك-إند)",
+            "deliverables": [
+              "Hub الإشعارات",
+              "Hub الدردشة",
+              "خدمات تخزين الإشعارات والرسائل",
+              "خدمات الإيميل وتنبيهات الدردشة"
+            ]
+          },
+          {
+            "memberId": 3,
+            "tasks": ["4.2 (Frontend)", "4.3"],
+            "estimatedHours": 70,
+            "description": "تطوير واجهة الدردشة المباشرة وتحسين تجربة المستخدم",
+            "deliverables": [
+              "واجهة الدردشة المباشرة",
+              "مركز الإشعارات",
+              "تحسينات AJAX وتحميل البيانات",
+              "تحسين التنقل والاستجابة"
+            ]
+          },
+          {
+            "memberId": 4,
+            "tasks": ["4.1 (Frontend)"],
+            "estimatedHours": 40,
+            "description": "تصميم وتنفيذ واجهات الإشعارات والتفاعلات",
+            "deliverables": [
+              "تصميم مركز الإشعارات",
+              "تصميم واجهة الدردشة",
+              "تأثيرات وانتقالات سلسة",
+              "تحسين تجربة التحميل"
+            ]
+          },
+          {
+            "memberId": 5,
+            "tasks": ["SignalR Optimization"],
+            "estimatedHours": 30,
+            "description": "تحسين أداء SignalR وقاعدة بيانات الإشعارات والدردشة",
+            "deliverables": [
+              "تحسين أداء SignalR",
+              "تحسين تخزين الإشعارات",
+              "إعداد التحجيم (Scaling)",
+              "اختبار الأداء تحت الضغط"
+            ]
+          }
+        ]
+      },
+      {
+        "phaseNumber": 5,
+        "phaseName": "اختبار وإطلاق",
+        "allocation": [
+          {
+            "memberId": 1,
+            "tasks": ["Integration Testing", "5.3"],
+            "estimatedHours": 40,
+            "description": "الإشراف على الاختبار والإطلاق",
+            "deliverables": [
+              "اختبارات التكامل",
+              "حل المشاكل النهائية",
+              "إطلاق النسخة التجريبية",
+              "وثائق المشروع النهائية"
+            ]
+          },
+          {
+            "memberId": 2,
+            "tasks": ["5.1 (Backend)"],
+            "estimatedHours": 20,
+            "description": "اختبار الأمان للباك-إند",
+            "deliverables": [
+              "اختبار ثغرات SQL Injection",
+              "اختبار الأمان ضد XSS وCSRF",
+              "اختبار API والإذن",
+              "إصلاح الأخطاء الأمنية"
+            ]
+          },
+          {
+            "memberId": 3,
+            "tasks": ["5.1 (Frontend)"],
+            "estimatedHours": 20,
+            "description": "اختبار التوافق وتجربة المستخدم",
+            "deliverables": [
+              "اختبار توافق المتصفحات",
+              "اختبار التوافق مع الأجهزة",
+              "اختبار سهولة الاستخدام",
+              "إصلاح مشاكل واجهة المستخدم"
+            ]
+          },
+          {
+            "memberId": 4,
+            "tasks": ["5.2"],
+            "estimatedHours": 24,
+            "description": "تحسين SEO",
+            "deliverables": [
+              "تحسين العناوين والأوصاف",
+              "تحسين هيكل URL",
+              "إضافة Sitemap.xml و Robots.txt",
+              "تطبيق Schema.org"
+            ]
+          },
+          {
+            "memberId": 5,
+            "tasks": ["5.3 (Infrastructure)"],
+            "estimatedHours": 30,
+            "description": "إعداد بيئة الإنتاج والنشر",
+            "deliverables": [
+              "إعداد الخادم وقاعدة البيانات",
+              "إعداد SSL وHTTPS",
+              "تكوين النسخ الاحتياطي التلقائي",
+              "تكوين المراقبة والتنبيهات"
+            ]
+          }
+        ]
+      }
+    ],
+    "teamWorkloadSummary": {
+      "memberWorkloads": [
+        {
+          "memberId": 1,
+          "totalHours": 188,
+          "phaseDistribution": {
+            "phase1": 40,
+            "phase2": 30,
+            "phase3": 48,
+            "phase4": 30,
+            "phase5": 40
+          }
+        },
+        {
+          "memberId": 2,
+          "totalHours": 312,
+          "phaseDistribution": {
+            "phase1": 72,
+            "phase2": 70,
+            "phase3": 90,
+            "phase4": 60,
+            "phase5": 20
+          }
+        },
+        {
+          "memberId": 3,
+          "totalHours": 250,
+          "phaseDistribution": {
+            "phase1": 0,
+            "phase2": 80,
+            "phase3": 80,
+            "phase4": 70,
+            "phase5": 20
+          }
+        },
+        {
+          "memberId": 4,
+          "totalHours": 234,
+          "phaseDistribution": {
+            "phase1": 40,
+            "phase2": 60,
+            "phase3": 70,
+            "phase4": 40,
+            "phase5": 24
+          }
+        },
+        {
+          "memberId": 5,
+          "totalHours": 160,
+          "phaseDistribution": {
+            "phase1": 30,
+            "phase2": 30,
+            "phase3": 40,
+            "phase4": 30,
+            "phase5": 30
+          }
+        }
+      ],
+      "totalProjectHours": 1144,
+      "estimatedDuration": "17 أيام",
+      "criticalPath": [
+        "1.1", "1.2", "1.3", "1.4", 
+        "2.1", "2.2", "2.3", 
+        "3.1", "3.2", "3.3", "3.4", 
+        "4.1", "4.2", "4.3", 
+        "5.1", "5.2", "5.3"
+      ]
+    },
+    "communicationPlan": {
+      "dailyStandups": {
+        "frequency": "يومياً",
+        "duration": "15 دقيقة",
+        "format": "اجتماع عبر الإنترنت",
+        "participants": "جميع أعضاء الفريق"
+      },
+      "sprintPlanning": {
+        "frequency": "كل يومين",
+        "duration": "2 ساعة",
+        "format": "اجتماع عبر الإنترنت",
+        "participants": "جميع أعضاء الفريق"
+      },
+      "sprintReview": {
+        "frequency": "كل يومين",
+        "duration": "1 ساعة",
+        "format": "اجتماع عبر الإنترنت",
+        "participants": "جميع أعضاء الفريق"
+      },
+      "tools": [
+        "Microsoft Teams للاجتماعات",
+        "GitHub/Azure DevOps لإدارة المشروع",
+        "Slack للتواصل اليومي",
+        "Figma/Adobe XD لمشاركة التصميمات"
+      ]
+    }
+  }
+} 

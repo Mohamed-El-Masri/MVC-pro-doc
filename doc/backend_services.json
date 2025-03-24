@@ -1,0 +1,905 @@
+{
+  "backendServices": {
+    "controllers": [
+      {
+        "name": "HomeController",
+        "description": "التحكم في الصفحة الرئيسية",
+        "routes": [
+          {
+            "action": "Index",
+            "route": "/",
+            "method": "GET",
+            "description": "عرض الصفحة الرئيسية",
+            "parameters": [],
+            "services": ["CategoryService", "BusinessService", "AdService"]
+          },
+          {
+            "action": "About",
+            "route": "/about",
+            "method": "GET",
+            "description": "عرض صفحة من نحن",
+            "parameters": [],
+            "services": []
+          },
+          {
+            "action": "Privacy",
+            "route": "/privacy",
+            "method": "GET",
+            "description": "عرض صفحة سياسة الخصوصية",
+            "parameters": [],
+            "services": []
+          }
+        ]
+      },
+      {
+        "name": "AccountController",
+        "description": "التحكم في حسابات المستخدمين",
+        "routes": [
+          {
+            "action": "Login",
+            "route": "/account/login",
+            "method": "GET",
+            "description": "عرض صفحة تسجيل الدخول",
+            "parameters": [
+              {
+                "name": "returnUrl",
+                "type": "string",
+                "required": false,
+                "description": "عنوان URL للعودة بعد تسجيل الدخول"
+              }
+            ],
+            "services": ["UserService"]
+          },
+          {
+            "action": "Login",
+            "route": "/account/login",
+            "method": "POST",
+            "description": "معالجة طلب تسجيل الدخول",
+            "parameters": [
+              {
+                "name": "loginViewModel",
+                "type": "LoginViewModel",
+                "required": true,
+                "description": "بيانات تسجيل الدخول"
+              }
+            ],
+            "services": ["UserService"]
+          },
+          {
+            "action": "Register",
+            "route": "/account/register",
+            "method": "GET",
+            "description": "عرض صفحة إنشاء حساب",
+            "parameters": [],
+            "services": ["UserService"]
+          },
+          {
+            "action": "Register",
+            "route": "/account/register",
+            "method": "POST",
+            "description": "معالجة طلب إنشاء حساب",
+            "parameters": [
+              {
+                "name": "registerViewModel",
+                "type": "RegisterViewModel",
+                "required": true,
+                "description": "بيانات إنشاء الحساب"
+              }
+            ],
+            "services": ["UserService"]
+          },
+          {
+            "action": "Logout",
+            "route": "/account/logout",
+            "method": "POST",
+            "description": "تسجيل الخروج",
+            "parameters": [],
+            "services": ["UserService"]
+          },
+          {
+            "action": "ForgotPassword",
+            "route": "/account/forgotpassword",
+            "method": "GET",
+            "description": "عرض صفحة نسيت كلمة المرور",
+            "parameters": [],
+            "services": ["UserService"]
+          },
+          {
+            "action": "ForgotPassword",
+            "route": "/account/forgotpassword",
+            "method": "POST",
+            "description": "معالجة طلب استعادة كلمة المرور",
+            "parameters": [
+              {
+                "name": "forgotPasswordViewModel",
+                "type": "ForgotPasswordViewModel",
+                "required": true,
+                "description": "بيانات استعادة كلمة المرور"
+              }
+            ],
+            "services": ["UserService", "EmailService"]
+          },
+          {
+            "action": "ResetPassword",
+            "route": "/account/resetpassword",
+            "method": "GET",
+            "description": "عرض صفحة إعادة تعيين كلمة المرور",
+            "parameters": [
+              {
+                "name": "code",
+                "type": "string",
+                "required": true,
+                "description": "رمز إعادة تعيين كلمة المرور"
+              },
+              {
+                "name": "email",
+                "type": "string",
+                "required": true,
+                "description": "البريد الإلكتروني للمستخدم"
+              }
+            ],
+            "services": ["UserService"]
+          },
+          {
+            "action": "ResetPassword",
+            "route": "/account/resetpassword",
+            "method": "POST",
+            "description": "معالجة طلب إعادة تعيين كلمة المرور",
+            "parameters": [
+              {
+                "name": "resetPasswordViewModel",
+                "type": "ResetPasswordViewModel",
+                "required": true,
+                "description": "بيانات إعادة تعيين كلمة المرور"
+              }
+            ],
+            "services": ["UserService"]
+          }
+        ]
+      },
+      {
+        "name": "BusinessController",
+        "description": "التحكم في عرض وتفاصيل الأعمال/الخدمات",
+        "routes": [
+          {
+            "action": "Details",
+            "route": "/business/{id}",
+            "method": "GET",
+            "description": "عرض تفاصيل عمل/خدمة",
+            "parameters": [
+              {
+                "name": "id",
+                "type": "int",
+                "required": true,
+                "description": "معرف العمل/الخدمة"
+              }
+            ],
+            "services": ["BusinessService", "ReviewService", "NotificationService"]
+          },
+          {
+            "action": "GetMenuItems",
+            "route": "/business/{id}/menuitems",
+            "method": "GET",
+            "description": "الحصول على عناصر قائمة العمل/الخدمة",
+            "parameters": [
+              {
+                "name": "id",
+                "type": "int",
+                "required": true,
+                "description": "معرف العمل/الخدمة"
+              }
+            ],
+            "services": ["BusinessService", "MenuItemService"]
+          },
+          {
+            "action": "AddReview",
+            "route": "/business/{id}/reviews",
+            "method": "POST",
+            "description": "إضافة مراجعة لعمل/خدمة",
+            "parameters": [
+              {
+                "name": "id",
+                "type": "int",
+                "required": true,
+                "description": "معرف العمل/الخدمة"
+              },
+              {
+                "name": "reviewViewModel",
+                "type": "ReviewViewModel",
+                "required": true,
+                "description": "بيانات المراجعة"
+              }
+            ],
+            "services": ["BusinessService", "ReviewService", "NotificationService"]
+          },
+          {
+            "action": "GetReviews",
+            "route": "/business/{id}/reviews",
+            "method": "GET",
+            "description": "الحصول على مراجعات عمل/خدمة",
+            "parameters": [
+              {
+                "name": "id",
+                "type": "int",
+                "required": true,
+                "description": "معرف العمل/الخدمة"
+              },
+              {
+                "name": "page",
+                "type": "int",
+                "required": false,
+                "description": "رقم الصفحة"
+              },
+              {
+                "name": "pageSize",
+                "type": "int",
+                "required": false,
+                "description": "حجم الصفحة"
+              }
+            ],
+            "services": ["BusinessService", "ReviewService"]
+          },
+          {
+            "action": "GetOpeningHours",
+            "route": "/business/{id}/openinghours",
+            "method": "GET",
+            "description": "الحصول على أوقات عمل الخدمة",
+            "parameters": [
+              {
+                "name": "id",
+                "type": "int",
+                "required": true,
+                "description": "معرف العمل/الخدمة"
+              }
+            ],
+            "services": ["BusinessService", "OpeningHourService"]
+          }
+        ]
+      },
+      {
+        "name": "SearchController",
+        "description": "التحكم في البحث وعرض النتائج",
+        "routes": [
+          {
+            "action": "Index",
+            "route": "/search",
+            "method": "GET",
+            "description": "البحث عن الأعمال/الخدمات وعرض النتائج",
+            "parameters": [
+              {
+                "name": "searchViewModel",
+                "type": "SearchViewModel",
+                "required": false,
+                "description": "بيانات البحث"
+              }
+            ],
+            "services": ["BusinessService", "CategoryService", "LocationService"]
+          },
+          {
+            "action": "GetMapData",
+            "route": "/search/map",
+            "method": "GET",
+            "description": "الحصول على بيانات الخريطة للنتائج",
+            "parameters": [
+              {
+                "name": "searchViewModel",
+                "type": "SearchViewModel",
+                "required": false,
+                "description": "بيانات البحث"
+              }
+            ],
+            "services": ["BusinessService", "LocationService"]
+          },
+          {
+            "action": "GetBusinessesByCategory",
+            "route": "/search/category/{categoryId}",
+            "method": "GET",
+            "description": "البحث عن الأعمال/الخدمات حسب الفئة",
+            "parameters": [
+              {
+                "name": "categoryId",
+                "type": "int",
+                "required": true,
+                "description": "معرف الفئة"
+              },
+              {
+                "name": "page",
+                "type": "int",
+                "required": false,
+                "description": "رقم الصفحة"
+              },
+              {
+                "name": "pageSize",
+                "type": "int",
+                "required": false,
+                "description": "حجم الصفحة"
+              }
+            ],
+            "services": ["BusinessService", "CategoryService"]
+          },
+          {
+            "action": "GetBusinessesByLocation",
+            "route": "/search/location",
+            "method": "GET",
+            "description": "البحث عن الأعمال/الخدمات حسب الموقع",
+            "parameters": [
+              {
+                "name": "latitude",
+                "type": "decimal",
+                "required": true,
+                "description": "خط العرض"
+              },
+              {
+                "name": "longitude",
+                "type": "decimal",
+                "required": true,
+                "description": "خط الطول"
+              },
+              {
+                "name": "distance",
+                "type": "decimal",
+                "required": false,
+                "description": "المسافة بالكيلومترات"
+              },
+              {
+                "name": "categoryId",
+                "type": "int",
+                "required": false,
+                "description": "معرف الفئة"
+              },
+              {
+                "name": "page",
+                "type": "int",
+                "required": false,
+                "description": "رقم الصفحة"
+              },
+              {
+                "name": "pageSize",
+                "type": "int",
+                "required": false,
+                "description": "حجم الصفحة"
+              }
+            ],
+            "services": ["BusinessService", "LocationService", "CategoryService"]
+          }
+        ]
+      },
+      {
+        "name": "ContactController",
+        "description": "التحكم في الاتصال والدردشة",
+        "routes": [
+          {
+            "action": "Index",
+            "route": "/contact",
+            "method": "GET",
+            "description": "عرض صفحة الاتصال",
+            "parameters": [],
+            "services": []
+          },
+          {
+            "action": "SendMessage",
+            "route": "/contact/send",
+            "method": "POST",
+            "description": "إرسال رسالة اتصال",
+            "parameters": [
+              {
+                "name": "contactViewModel",
+                "type": "ContactViewModel",
+                "required": true,
+                "description": "بيانات الاتصال"
+              }
+            ],
+            "services": ["ContactService", "EmailService"]
+          },
+          {
+            "action": "StartChat",
+            "route": "/contact/chat",
+            "method": "POST",
+            "description": "بدء محادثة جديدة",
+            "parameters": [
+              {
+                "name": "chatViewModel",
+                "type": "ChatViewModel",
+                "required": true,
+                "description": "بيانات المحادثة"
+              }
+            ],
+            "services": ["ChatService", "NotificationService", "EmailService"]
+          },
+          {
+            "action": "GetFaqs",
+            "route": "/contact/faqs",
+            "method": "GET",
+            "description": "الحصول على الأسئلة الشائعة",
+            "parameters": [],
+            "services": ["FaqService"]
+          }
+        ]
+      },
+      {
+        "name": "DashboardController",
+        "description": "التحكم في لوحة تحكم المستخدم",
+        "routes": [
+          {
+            "action": "Index",
+            "route": "/dashboard",
+            "method": "GET",
+            "description": "عرض لوحة تحكم المستخدم الرئيسية",
+            "parameters": [],
+            "services": ["UserService", "ReviewService", "NotificationService", "BusinessService"],
+            "authorize": ["Customer", "BusinessOwner"]
+          },
+          {
+            "action": "GetNotifications",
+            "route": "/dashboard/notifications",
+            "method": "GET",
+            "description": "الحصول على إشعارات المستخدم",
+            "parameters": [],
+            "services": ["NotificationService"],
+            "authorize": ["Customer", "BusinessOwner"]
+          },
+          {
+            "action": "MarkNotificationAsRead",
+            "route": "/dashboard/notifications/{id}/read",
+            "method": "POST",
+            "description": "تحديد إشعار كمقروء",
+            "parameters": [
+              {
+                "name": "id",
+                "type": "int",
+                "required": true,
+                "description": "معرف الإشعار"
+              }
+            ],
+            "services": ["NotificationService"],
+            "authorize": ["Customer", "BusinessOwner"]
+          }
+        ]
+      },
+      {
+        "name": "ProfileController",
+        "description": "التحكم في ملف المستخدم الشخصي",
+        "routes": [
+          {
+            "action": "Index",
+            "route": "/dashboard/profile",
+            "method": "GET",
+            "description": "عرض صفحة إدارة الحساب",
+            "parameters": [],
+            "services": ["UserService"],
+            "authorize": ["Customer", "BusinessOwner"]
+          },
+          {
+            "action": "UpdateProfile",
+            "route": "/dashboard/profile",
+            "method": "POST",
+            "description": "تحديث بيانات المستخدم",
+            "parameters": [
+              {
+                "name": "profileViewModel",
+                "type": "ProfileViewModel",
+                "required": true,
+                "description": "بيانات الملف الشخصي"
+              }
+            ],
+            "services": ["UserService"],
+            "authorize": ["Customer", "BusinessOwner"]
+          },
+          {
+            "action": "ChangePassword",
+            "route": "/dashboard/profile/changepassword",
+            "method": "POST",
+            "description": "تغيير كلمة المرور",
+            "parameters": [
+              {
+                "name": "changePasswordViewModel",
+                "type": "ChangePasswordViewModel",
+                "required": true,
+                "description": "بيانات تغيير كلمة المرور"
+              }
+            ],
+            "services": ["UserService"],
+            "authorize": ["Customer", "BusinessOwner"]
+          },
+          {
+            "action": "UpdateNotificationSettings",
+            "route": "/dashboard/profile/notificationsettings",
+            "method": "POST",
+            "description": "تحديث إعدادات الإشعارات",
+            "parameters": [
+              {
+                "name": "notificationSettingsViewModel",
+                "type": "NotificationSettingsViewModel",
+                "required": true,
+                "description": "إعدادات الإشعارات"
+              }
+            ],
+            "services": ["UserService", "NotificationService"],
+            "authorize": ["Customer", "BusinessOwner"]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "UserService",
+        "description": "خدمة إدارة المستخدمين والتحقق",
+        "methods": [
+          {
+            "name": "RegisterUserAsync",
+            "description": "تسجيل مستخدم جديد",
+            "parameters": [
+              {
+                "name": "registerViewModel",
+                "type": "RegisterViewModel",
+                "description": "بيانات التسجيل"
+              }
+            ],
+            "returnType": "Task<IdentityResult>",
+            "implementation": "يستخدم Identity Framework لإنشاء مستخدم جديد، تعيين الدور، وإرسال رسالة تأكيد البريد الإلكتروني"
+          },
+          {
+            "name": "LoginUserAsync",
+            "description": "تسجيل دخول المستخدم",
+            "parameters": [
+              {
+                "name": "loginViewModel",
+                "type": "LoginViewModel",
+                "description": "بيانات تسجيل الدخول"
+              }
+            ],
+            "returnType": "Task<SignInResult>",
+            "implementation": "يستخدم Identity Framework للتحقق من بيانات تسجيل الدخول وإنشاء جلسة للمستخدم"
+          },
+          {
+            "name": "LogoutUserAsync",
+            "description": "تسجيل خروج المستخدم",
+            "parameters": [],
+            "returnType": "Task",
+            "implementation": "يستخدم Identity Framework لإنهاء جلسة المستخدم"
+          },
+          {
+            "name": "GetUserByIdAsync",
+            "description": "الحصول على مستخدم بواسطة المعرف",
+            "parameters": [
+              {
+                "name": "userId",
+                "type": "string",
+                "description": "معرف المستخدم"
+              }
+            ],
+            "returnType": "Task<ApplicationUser>",
+            "implementation": "يستخدم Identity Framework للحصول على مستخدم من قاعدة البيانات بواسطة المعرف"
+          },
+          {
+            "name": "GetUserByEmailAsync",
+            "description": "الحصول على مستخدم بواسطة البريد الإلكتروني",
+            "parameters": [
+              {
+                "name": "email",
+                "type": "string",
+                "description": "البريد الإلكتروني للمستخدم"
+              }
+            ],
+            "returnType": "Task<ApplicationUser>",
+            "implementation": "يستخدم Identity Framework للحصول على مستخدم من قاعدة البيانات بواسطة البريد الإلكتروني"
+          },
+          {
+            "name": "UpdateUserAsync",
+            "description": "تحديث بيانات المستخدم",
+            "parameters": [
+              {
+                "name": "user",
+                "type": "ApplicationUser",
+                "description": "بيانات المستخدم"
+              }
+            ],
+            "returnType": "Task<IdentityResult>",
+            "implementation": "يستخدم Identity Framework لتحديث بيانات المستخدم في قاعدة البيانات"
+          },
+          {
+            "name": "ChangePasswordAsync",
+            "description": "تغيير كلمة مرور المستخدم",
+            "parameters": [
+              {
+                "name": "user",
+                "type": "ApplicationUser",
+                "description": "المستخدم"
+              },
+              {
+                "name": "currentPassword",
+                "type": "string",
+                "description": "كلمة المرور الحالية"
+              },
+              {
+                "name": "newPassword",
+                "type": "string",
+                "description": "كلمة المرور الجديدة"
+              }
+            ],
+            "returnType": "Task<IdentityResult>",
+            "implementation": "يستخدم Identity Framework لتغيير كلمة مرور المستخدم"
+          },
+          {
+            "name": "GeneratePasswordResetTokenAsync",
+            "description": "إنشاء رمز إعادة تعيين كلمة المرور",
+            "parameters": [
+              {
+                "name": "user",
+                "type": "ApplicationUser",
+                "description": "المستخدم"
+              }
+            ],
+            "returnType": "Task<string>",
+            "implementation": "يستخدم Identity Framework لإنشاء رمز إعادة تعيين كلمة المرور"
+          },
+          {
+            "name": "ResetPasswordAsync",
+            "description": "إعادة تعيين كلمة مرور المستخدم",
+            "parameters": [
+              {
+                "name": "user",
+                "type": "ApplicationUser",
+                "description": "المستخدم"
+              },
+              {
+                "name": "token",
+                "type": "string",
+                "description": "رمز إعادة التعيين"
+              },
+              {
+                "name": "newPassword",
+                "type": "string",
+                "description": "كلمة المرور الجديدة"
+              }
+            ],
+            "returnType": "Task<IdentityResult>",
+            "implementation": "يستخدم Identity Framework لإعادة تعيين كلمة مرور المستخدم"
+          },
+          {
+            "name": "UpdateNotificationSettingsAsync",
+            "description": "تحديث إعدادات الإشعارات للمستخدم",
+            "parameters": [
+              {
+                "name": "userId",
+                "type": "string",
+                "description": "معرف المستخدم"
+              },
+              {
+                "name": "notificationSettings",
+                "type": "NotificationSettingsViewModel",
+                "description": "إعدادات الإشعارات"
+              }
+            ],
+            "returnType": "Task<bool>",
+            "implementation": "تحديث إعدادات الإشعارات في جدول إعدادات المستخدم"
+          }
+        ]
+      }
+    ],
+    "signalRHubs": [
+      {
+        "name": "NotificationHub",
+        "description": "مركز الإشعارات بـ SignalR",
+        "methods": [
+          {
+            "name": "SendNotificationToUser",
+            "description": "إرسال إشعار لمستخدم محدد",
+            "parameters": [
+              {
+                "name": "userId",
+                "type": "string",
+                "description": "معرف المستخدم"
+              },
+              {
+                "name": "notification",
+                "type": "Notification",
+                "description": "الإشعار"
+              }
+            ]
+          },
+          {
+            "name": "SendNotificationToAll",
+            "description": "إرسال إشعار لجميع المستخدمين",
+            "parameters": [
+              {
+                "name": "notification",
+                "type": "Notification",
+                "description": "الإشعار"
+              }
+            ]
+          },
+          {
+            "name": "SendNotificationToGroup",
+            "description": "إرسال إشعار لمجموعة من المستخدمين",
+            "parameters": [
+              {
+                "name": "groupName",
+                "type": "string",
+                "description": "اسم المجموعة"
+              },
+              {
+                "name": "notification",
+                "type": "Notification",
+                "description": "الإشعار"
+              }
+            ]
+          },
+          {
+            "name": "JoinGroup",
+            "description": "انضمام المستخدم إلى مجموعة",
+            "parameters": [
+              {
+                "name": "groupName",
+                "type": "string",
+                "description": "اسم المجموعة"
+              }
+            ]
+          },
+          {
+            "name": "LeaveGroup",
+            "description": "مغادرة المستخدم لمجموعة",
+            "parameters": [
+              {
+                "name": "groupName",
+                "type": "string",
+                "description": "اسم المجموعة"
+              }
+            ]
+          }
+        ],
+        "clientMethods": [
+          {
+            "name": "ReceiveNotification",
+            "description": "استقبال إشعار",
+            "parameters": [
+              {
+                "name": "notification",
+                "type": "Notification",
+                "description": "الإشعار"
+              }
+            ]
+          },
+          {
+            "name": "ReceiveBroadcast",
+            "description": "استقبال بث",
+            "parameters": [
+              {
+                "name": "message",
+                "type": "string",
+                "description": "الرسالة"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ChatHub",
+        "description": "مركز الدردشة بـ SignalR",
+        "methods": [
+          {
+            "name": "SendMessageToUser",
+            "description": "إرسال رسالة لمستخدم محدد",
+            "parameters": [
+              {
+                "name": "toUserId",
+                "type": "string",
+                "description": "معرف المستخدم المستلم"
+              },
+              {
+                "name": "message",
+                "type": "ChatMessage",
+                "description": "الرسالة"
+              }
+            ]
+          },
+          {
+            "name": "JoinConversation",
+            "description": "انضمام المستخدم إلى محادثة",
+            "parameters": [
+              {
+                "name": "conversationId",
+                "type": "string",
+                "description": "معرف المحادثة"
+              }
+            ]
+          },
+          {
+            "name": "LeaveConversation",
+            "description": "مغادرة المستخدم لمحادثة",
+            "parameters": [
+              {
+                "name": "conversationId",
+                "type": "string",
+                "description": "معرف المحادثة"
+              }
+            ]
+          },
+          {
+            "name": "SendMessageToConversation",
+            "description": "إرسال رسالة لمحادثة",
+            "parameters": [
+              {
+                "name": "conversationId",
+                "type": "string",
+                "description": "معرف المحادثة"
+              },
+              {
+                "name": "message",
+                "type": "ChatMessage",
+                "description": "الرسالة"
+              }
+            ]
+          },
+          {
+            "name": "MarkMessageAsRead",
+            "description": "تحديد رسالة كمقروءة",
+            "parameters": [
+              {
+                "name": "messageId",
+                "type": "string",
+                "description": "معرف الرسالة"
+              }
+            ]
+          }
+        ],
+        "clientMethods": [
+          {
+            "name": "ReceiveMessage",
+            "description": "استقبال رسالة",
+            "parameters": [
+              {
+                "name": "message",
+                "type": "ChatMessage",
+                "description": "الرسالة"
+              }
+            ]
+          },
+          {
+            "name": "UserJoinedConversation",
+            "description": "انضم مستخدم إلى المحادثة",
+            "parameters": [
+              {
+                "name": "userId",
+                "type": "string",
+                "description": "معرف المستخدم"
+              },
+              {
+                "name": "conversationId",
+                "type": "string",
+                "description": "معرف المحادثة"
+              }
+            ]
+          },
+          {
+            "name": "UserLeftConversation",
+            "description": "غادر مستخدم المحادثة",
+            "parameters": [
+              {
+                "name": "userId",
+                "type": "string",
+                "description": "معرف المستخدم"
+              },
+              {
+                "name": "conversationId",
+                "type": "string",
+                "description": "معرف المحادثة"
+              }
+            ]
+          },
+          {
+            "name": "MessageRead",
+            "description": "تم قراءة الرسالة",
+            "parameters": [
+              {
+                "name": "messageId",
+                "type": "string",
+                "description": "معرف الرسالة"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+} 

@@ -1,0 +1,84 @@
+{
+  "projectName": "Vyrlo - منصة العثور على الخدمات المحلية",
+  "projectDescription": "منصة تساعد المستخدمين في العثور على الخدمات المحلية وفقًا لموقعهم الجغرافي، مع تصنيفات، مراجعات، وإعلانات مدفوعة",
+  "projectGoals": [
+    "إنشاء منصة سهلة الاستخدام للعثور على الخدمات المحلية",
+    "توفير نظام تصنيف وتقييم للخدمات",
+    "دعم أصحاب الأعمال من خلال الإعلانات والاشتراكات",
+    "توفير نظام دردشة مباشرة لخدمة العملاء",
+    "تحسين تجربة المستخدم من خلال الإشعارات الفورية"
+  ],
+  "targetAudience": [
+    "المستخدمين الباحثين عن خدمات محلية",
+    "أصحاب الأعمال الراغبين في الترويج لخدماتهم",
+    "Admin"
+  ],
+  "uniqueSellingPoints": [
+    "تحديد المواقع الجغرافية للخدمات القريبة",
+    "نظام تقييم ومراجعة شامل",
+    "دردشة مباشرة لخدمة العملاء",
+    "إشعارات فورية باستخدام SignalR",
+    "نظام إعلانات مرن",
+    "اشتراكات متنوعة للأعمال"
+  ],
+  "technologies": {
+    "frontend": [
+      "HTML5",
+      "CSS3",
+      "Bootstrap",
+      "jQuery",
+      "Font Awesome",
+      "AJAX"
+    ],
+    "backend": [
+      "ASP.NET MVC",
+      "Entity Framework (Code-First)",
+      "Identity Framework",
+      "SignalR"
+    ],
+    "apis": [
+      "Google Maps API / Leaflet.js",
+      "PayPal API"
+    ],
+    "security": [
+      "HTTPS",
+      "تشفير كلمات المرور",
+      "Google reCAPTCHA",
+      "فحص إدخالات المستخدمين"
+    ]
+  },
+  "systemArchitecture": {
+    "databaseLayer": "SQL Server مع Entity Framework Code-First",
+    "businessLogicLayer": "ASP.NET MVC Controllers وServices",
+    "presentationLayer": "MVC Views مع Bootstrap وjQuery",
+    "realtimeLayer": "SignalR للإشعارات والدردشة المباشرة",
+    "securityLayer": "Identity Framework للتحقق والصلاحيات"
+  },
+  "developmentPriorities": {
+    "phase1": [
+      "إعداد البنية التحتية للمشروع",
+      "تصميم وتنفيذ قاعدة البيانات",
+      "إنشاء نظام المستخدمين والصلاحيات"
+    ],
+    "phase2": [
+      "تطوير الصفحات الأساسية",
+      "تنفيذ نظام البحث والفلترة",
+      "دمج خرائط Google/Leaflet.js"
+    ],
+    "phase3": [
+      "تطوير لوحات التحكم",
+      "تنفيذ نظام الإعلانات والاشتراكات",
+      "دمج نظام المدفوعات"
+    ],
+    "phase4": [
+      "تطوير نظام الإشعارات باستخدام SignalR",
+      "تطوير نظام الدردشة المباشرة",
+      "تحسين تجربة المستخدم والواجهة"
+    ],
+    "phase5": [
+      "اختبار الأداء والأمان",
+      "تحسين SEO",
+      "إطلاق النسخة التجريبية"
+    ]
+  }
+} 

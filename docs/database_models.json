@@ -1,0 +1,191 @@
+{
+    "title": "نماذج قاعدة البيانات",
+    "description": "توثيق شامل لنماذج قاعدة البيانات الرئيسية والعلاقات بينها",
+    "models": {
+        "User": {
+            "description": "نموذج المستخدم - يرث من IdentityUser",
+            "properties": {
+                "Id": "معرف المستخدم (string)",
+                "FullName": "الاسم الكامل",
+                "Email": "البريد الإلكتروني",
+                "PhoneNumber": "رقم الهاتف",
+                "PasswordHash": "تشفير كلمة المرور",
+                "Role": "الدور (Admin, BusinessOwner, Customer)",
+                "ProfileImage": "صورة الملف الشخصي",
+                "CreatedAt": "تاريخ إنشاء الحساب"
+            },
+            "relationships": {
+                "OwnedBusinesses": "علاقة 1:n مع الأعمال",
+                "Reviews": "علاقة 1:n مع المراجعات",
+                "Payments": "علاقة 1:n مع المدفوعات",
+                "Notifications": "علاقة 1:n مع الإشعارات",
+                "SentMessages": "علاقة 1:n مع الرسائل المرسلة",
+                "ReceivedMessages": "علاقة 1:n مع الرسائل المستلمة"
+            }
+        },
+        "Business": {
+            "description": "نموذج الأعمال/الخدمات",
+            "properties": {
+                "Id": "معرف العمل",
+                "OwnerId": "معرف المالك (مرجع للمستخدم)",
+                "Name": "اسم العمل/الخدمة",
+                "CategoryId": "معرف الفئة",
+                "Description": "وصف العمل/الخدمة",
+                "MainImage": "الصورة الرئيسية",
+                "Gallery": "معرض الصور",
+                "Latitude": "خط العرض",
+                "Longitude": "خط الطول",
+                "Address": "العنوان التفصيلي",
+                "Features": "المميزات المتوفرة",
+                "BusinessType": "نوع العمل (Regular, Featured, Sponsored)",
+                "IsActive": "حالة النشاط",
+                "SubscriptionEndDate": "تاريخ انتهاء الاشتراك",
+                "MenuItems": "قائمة المنتجات/الخدمات"
+            },
+            "relationships": {
+                "Owner": "علاقة n:1 مع المستخدم",
+                "Category": "علاقة n:1 مع الفئة",
+                "Reviews": "علاقة 1:n مع المراجعات",
+                "OpeningHours": "علاقة 1:n مع أوقات العمل",
+                "Advertisements": "علاقة 1:n مع الإعلانات"
+            }
+        },
+        "Category": {
+            "description": "نموذج الفئات",
+            "properties": {
+                "Id": "معرف الفئة",
+                "Name": "اسم الفئة",
+                "Icon": "أيقونة الفئة",
+                "DefaultFeatures": "المميزات الافتراضية للفئة"
+            },
+            "relationships": {
+                "Businesses": "علاقة 1:n مع الأعمال"
+            }
+        },
+        "Review": {
+            "description": "نموذج المراجعات",
+            "properties": {
+                "Id": "معرف المراجعة",
+                "UserId": "معرف المستخدم",
+                "BusinessId": "معرف العمل",
+                "Rating": "التقييم (1-5)",
+                "Comment": "التعليق",
+                "CreatedAt": "تاريخ الإنشاء"
+            },
+            "relationships": {
+                "User": "علاقة n:1 مع المستخدم",
+                "Business": "علاقة n:1 مع العمل"
+            }
+        },
+        "Ad": {
+            "description": "نموذج الإعلانات",
+            "properties": {
+                "Id": "معرف الإعلان",
+                "BusinessId": "معرف العمل (اختياري)",
+                "Image": "صورة الإعلان",
+                "Link": "رابط الإعلان",
+                "Type": "نوع الإعلان (BusinessAd, ExternalAd)",
+                "StartDate": "تاريخ البداية",
+                "EndDate": "تاريخ النهاية",
+                "PackageType": "نوع الباقة (Daily, Weekly, Monthly)",
+                "IsActive": "حالة النشاط"
+            },
+            "relationships": {
+                "Business": "علاقة n:1 مع العمل"
+            }
+        },
+        "Payment": {
+            "description": "نموذج المدفوعات",
+            "properties": {
+                "Id": "معرف الدفع",
+                "UserId": "معرف المستخدم",
+                "Amount": "المبلغ",
+                "PaymentMethod": "طريقة الدفع (PayPal, CreditCard)",
+                "PaymentStatus": "حالة الدفع",
+                "TransactionId": "معرف العملية",
+                "CreatedAt": "تاريخ الإنشاء"
+            },
+            "relationships": {
+                "User": "علاقة n:1 مع المستخدم"
+            }
+        },
+        "Notification": {
+            "description": "نموذج الإشعارات",
+            "properties": {
+                "Id": "معرف الإشعار",
+                "UserId": "معرف المستخدم (المستلم)",
+                "Message": "نص الإشعار",
+                "IsRead": "حالة القراءة",
+                "CreatedAt": "تاريخ الإنشاء",
+                "Type": "نوع الإشعار",
+                "BusinessId": "معرف العمل (اختياري)",
+                "ReviewId": "معرف المراجعة (اختياري)",
+                "ChatId": "معرف المحادثة (اختياري)"
+            },
+            "relationships": {
+                "User": "علاقة n:1 مع المستخدم",
+                "Business": "علاقة n:1 مع العمل",
+                "Review": "علاقة n:1 مع المراجعة",
+                "Chat": "علاقة n:1 مع المحادثة"
+            }
+        },
+        "Chat": {
+            "description": "نموذج الدردشة",
+            "properties": {
+                "Id": "معرف الرسالة",
+                "SenderId": "معرف المرسل",
+                "ReceiverId": "معرف المستلم",
+                "Message": "نص الرسالة",
+                "IsRead": "حالة القراءة",
+                "CreatedAt": "تاريخ الإرسال",
+                "ConversationId": "معرف المحادثة",
+                "BusinessId": "معرف العمل (اختياري)"
+            },
+            "relationships": {
+                "Sender": "علاقة n:1 مع المرسل",
+                "Receiver": "علاقة n:1 مع المستلم",
+                "Business": "علاقة n:1 مع العمل"
+            }
+        },
+        "OpeningHour": {
+            "description": "نموذج أوقات العمل",
+            "properties": {
+                "Id": "معرف وقت العمل",
+                "BusinessId": "معرف العمل",
+                "DayOfWeek": "اليوم (الأحد - السبت)",
+                "OpenTime": "وقت الفتح",
+                "CloseTime": "وقت الإغلاق",
+                "IsClosed": "مغلق اليوم",
+                "CloseReason": "سبب الإغلاق (اختياري)"
+            },
+            "relationships": {
+                "Business": "علاقة n:1 مع العمل"
+            }
+        },
+        "Package": {
+            "description": "نموذج الحزم",
+            "properties": {
+                "Id": "معرف الحزمة",
+                "Name": "اسم الحزمة (Basic, Standard, Premium)",
+                "Duration": "المدة بالأيام",
+                "Price": "السعر",
+                "FeaturesIncluded": "الميزات المضمنة",
+                "IsActive": "حالة النشاط",
+                "MaxBusinessCount": "الحد الأقصى لعدد الأعمال",
+                "MaxImagesPerBusiness": "الحد الأقصى للصور لكل عمل",
+                "IncludesFeaturedListing": "يتضمن قائمة مميزة",
+                "IncludesAdvertising": "يتضمن إعلانات",
+                "AdDaysIncluded": "عدد أيام الإعلانات المضمنة",
+                "MonthlyDiscountPercentage": "نسبة الخصم الشهري"
+            }
+        }
+    },
+    "relationships_overview": {
+        "User_Business": "علاقة واحد لكثير - المستخدم يمكن أن يمتلك عدة أعمال",
+        "Business_Category": "علاقة كثير لواحد - كل عمل ينتمي لفئة واحدة",
+        "Business_Review": "علاقة واحد لكثير - العمل يمكن أن يحصل على عدة مراجعات",
+        "User_Review": "علاقة واحد لكثير - المستخدم يمكن أن يكتب عدة مراجعات",
+        "Business_OpeningHour": "علاقة واحد لكثير - العمل له عدة أوقات عمل",
+        "User_Chat": "علاقة واحد لكثير - المستخدم يمكن أن يشارك في عدة محادثات"
+    }
+} 
